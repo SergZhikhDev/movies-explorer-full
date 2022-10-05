@@ -1,0 +1,24 @@
+.page {
+  margin: 0 auto;
+  max-width: 1280px;
+  min-width: 320px;
+  position: relative
+}
+
+@media screen and (max-width:320px) {
+  .page {
+    background-image: url(../../images/warning.png);
+    background-repeat: round;
+    height: 100vh;
+    width: 100vw
+  }
+}
+
+@media screen and (max-height:400px) {
+  .page {
+    background-image: url(../../images/warning.png);
+    background-repeat: round;
+    height: 100vh;
+    width: 100vw
+  }
+}

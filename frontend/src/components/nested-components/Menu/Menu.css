@@ -1,0 +1,15 @@
+.menu {
+      display: flex;
+    font: normal 400 14px/1.29 Inter, Arial, sans-serif;
+    margin: 15px 0;
+  }
+  
+
+  @media screen and (max-width: 769px ) {
+    .menu {
+      
+    
+    display: none;
+      }
+
+  }

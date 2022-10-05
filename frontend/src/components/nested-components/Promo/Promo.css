@@ -1,0 +1,131 @@
+.project-poster {
+  background-color: #073042;
+  height: 100vh;
+  position: relative
+}
+
+.project-poster__back-image {
+  background-image: url(../../../images/logo-practicum.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  bottom: 188px;
+  height: 320px;
+  margin: auto;
+  max-width: 730px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 156px;
+  background-size: contain;
+
+}
+
+.project-poster__title {
+  font: normal 400 50px/1.16 Inter, Arial, sans-serif;
+  font-size: clamp(31px, 8vw, 50px);
+  line-height: clamp(1.26, 1.2, 1.16);
+  letter-spacing: -.04em;
+  margin: 102px 0;
+  text-align: center
+}
+
+
+
+@media screen and (max-width: 769px) {
+
+
+  .project-poster {
+    padding-left: 19px;
+    padding-right: 19px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .project-poster__title {
+    margin: auto 19px;
+  }
+
+  .project-poster__back-image {
+    position: relative;
+    top: 0;
+    display: flex;
+    align-items: center;
+  }
+
+
+}
+
+@media screen and (max-width: 601px) {
+  .project-poster {
+    padding-left: 35px;
+    padding-right: 35px;
+
+
+  }
+
+  .project-poster__back-image {
+    height: clamp(248px, 60vw, 320px);
+
+  }
+
+  .project-poster__title {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 481px) {
+  .project-poster {
+    padding-left: 15px;
+    padding-right: 15px;
+
+  }
+
+
+}
+
+@media screen and (max-height: 500px) {
+  .project-poster__back-image {
+    height: calc(100vh - 150px);
+    display: flex;
+    align-items: center;
+    background-repeat: space;
+
+  }
+
+
+}
+
+@media screen and (max-width: 321px) {
+  .project-poster {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .project-poster__back-image {
+    bottom: 188px;
+    height: 248px;
+    margin: auto;
+    max-width: 300px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 156px
+  }
+
+
+
+  .project-poster__title {
+    font-size: 31px;
+    line-height: 1.26;
+
+  }
+
+
+
+
+
+
+
+
+}

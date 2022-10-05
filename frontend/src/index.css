@@ -1,0 +1,162 @@
+@import "./vendor/fonts/inter.css";
+
+* {
+  border: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  display: block;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+a:hover,
+button:hover,
+.search__button:hover {
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s linear;
+}
+
+*[disabled]:hover{
+  cursor: not-allowed;
+  opacity:1;
+}
+
+body {
+  background-color: #202020;
+  color: #fff;
+  min-width: 320px;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+*:focus-visible{
+  outline:none ;
+  outline-offset: 5px;
+ }
+
+img {
+  display: block;
+  width: 100%;
+}
+
+li:last-child {
+  margin-bottom: 0;
+  margin-right: 0;
+}
+
+
+ul {
+  list-style: none;
+}
+
+
+
+/* padding для section (section-padding) */
+.sp,
+.section-padding {
+  padding: 0 70px;
+}
+
+.sfp,
+.section-form-padding
+{padding: 0;}
+
+.sfp_type_reg{
+padding: 0;
+}
+
+
+@media screen and (max-width: 769px) {
+  .sfp
+  {padding: 0 23.3vw;}
+
+  .sfp_type_reg{
+    padding: 0 24.2vw;
+    }
+
+  .sp {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+
+@media screen and (max-width: 601px) {
+  .sp {
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+  .sfp_type_reg{
+    padding: 0 15.75vw;
+    }
+  .sfp
+{padding: 0 18.07vw;}
+}
+
+@media screen and (max-width: 481px) {
+  .sp {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .sfp_type_reg{
+    padding: 0 9.85vw;
+    }
+  .sfp
+{padding: 0 14.34vw;}
+}
+
+@media screen and (max-width: 321px) {
+
+  .sp {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .sfp_type_reg{
+    padding: 0 9.37vw;
+    }
+  .sfp
+{padding: 0 9.37vw;}
+}
+
+/* @media screen and (max-width:320px) {
+  .sp {
+    background-image: url(./images/warning.png);
+    background-repeat: round;
+    height: 100vh;
+    width: 100vw
+  }
+}
+
+@media screen and (max-height:400px) {
+  .sp {
+    background-image: url(./images/warning.png);
+    background-repeat: round;
+    height: 100vh;
+    width: 100vw
+  }
+} */
+.hiden-pages,
+.hp {display: flex;}
+
+@media screen and (max-width:320px) {
+  .hp {
+display: none !important;;
+  }
+}
+
+@media screen and (max-height:400px) {
+  .hp {
+    display: none !important;
+      }
+}
