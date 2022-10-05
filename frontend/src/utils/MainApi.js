@@ -81,7 +81,8 @@ class Api {
 
 
     export const mainApi = new Api({ 
-        baseUrl: "http://localhost:3002", 
+        // baseUrl: "http://localhost:3002", 
+        baseUrl:    "  http://front-szh-dpl.students.nomorepartiesxyz.ru",
         headers: { 
           // authorization: "$2b$10$JMhnSg/mONjSxtW9qR7Z/uda0QUjnjPSsosXkWc6/4piDqxjEF9kG", 
           "Content-Type": "application/json", 

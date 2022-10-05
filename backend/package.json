@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/SergZhikhDev/movies-explorer-api/issues"
   },
-  "homepage": "https://github.com/SergZhikhDev/movies-explorer-api#readme",
+  "homepage": "https://front-szh-dpl.students.nomorepartiesxyz.ru",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
