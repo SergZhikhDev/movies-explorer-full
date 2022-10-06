@@ -10,6 +10,7 @@ function FilterCheckbox(props) {
 
   const handleChangeCheckbox = (evt) => {
     evt.preventDefault();
+    console.log('click')
     handleChange(evt);
     props.onChangeCheckbox(evt);
   };
@@ -22,7 +23,7 @@ function FilterCheckbox(props) {
             className='checkbox__invisible invisible'
             type='checkbox'
             name='short'
-            checked={values.short}
+            checked={values.short || ''}
             onChange={handleChangeCheckbox}
           />
           <span className='checkbox-switch'> </span>

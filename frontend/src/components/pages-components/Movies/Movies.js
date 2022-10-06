@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import "./Movies.css";
 import Header from "../../nested-components/Header/Header";
 import Footer from "../../nested-components/Footer/Footer";
-import SearchForm from "../../nested-components/SearchForm/SearchForm";
-import {MoviesCardList} from "../../nested-components/MoviesCardList/MoviesCardList";
+import { SearchForm } from "../../nested-components/SearchForm/SearchForm";
+import { MoviesCardList } from "../../nested-components/MoviesCardList/MoviesCardList";
 import { filterFilms } from "../../../utils/filterFilms";
 import { formatLikedFilms, setLike } from "../../../utils/likes";
 import {
@@ -14,7 +14,7 @@ import {
   breackpoint,
   short_movie,
 } from "../../../utils/constants";
-import { useCardCount } from "../../../utils//useCardCount";
+import { useCardCount } from "../../../utils/useCardCount";
 
 function Movies({
   requestAllFilms,
@@ -60,7 +60,9 @@ function Movies({
       saveFilmsLocal(films);
       setFiltredFilms(films);
 
-      films?.length ? hideErrorMessage() : showErrorMessage(reports.apiMessages.not_found);
+      films?.length
+        ? hideErrorMessage()
+        : showErrorMessage(reports.apiMessages.not_found);
     }
     // eslint-disable-next-line
   }, [allFilms, queryValues]);

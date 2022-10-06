@@ -1,55 +1,46 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 
 import "./App.css";
 
 import Main from "../pages-components/Main/Main";
-import Movies from "../pages-components/Movies/Movies";
-import SavedMovies from "../pages-components/SavedMovies/SavedMovies";
-import Profile from "../pages-components/Profile/Profile";
 import Login from "../pages-components/Login/Login";
-import { Register } from "../pages-components/Register/Register";
+import Movies from "../pages-components/Movies/Movies";
 import NotFound from "../pages-components/NotFound/NotFound";
+import { Profile } from "../pages-components/Profile/Profile";
+import { Register } from "../pages-components/Register/Register";
+import { SavedMovies } from "../pages-components/SavedMovies/SavedMovies";
 import { Attention } from "../Attention/Attention";
 
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 import { mainApi } from "../../utils/MainApi";
-import { moviesApi } from "../../utils/MoviesApi";
 import { reports } from "../../utils/constants";
-
+import { moviesApi } from "../../utils/MoviesApi";
 import LocalStorage from "../../utils/LocalStorage";
 
 export const App = () => {
-  // Данные текущего пользоволетя
-  const [currentUser, setCurrentUser] = useState({});
-  // Токен
   const [token, setToken] = useState("");
-
+  const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // Состояние ответа сервера
-  const [isFetchError, setIsFetchError] = useState(false);
-
   const [isPreloader, setIsPreloader] = useState(true);
-
+  const [isFetchError, setIsFetchError] = useState(false);
   const [messageAttention, setMessageAttention] = useState(null);
   const [isActiveAttention, setIsActiveAttention] = useState(false);
 
-  const location = useLocation();
-
   const history = useHistory();
+  const location = useLocation();
   const jwtLocal = new LocalStorage("jwt");
   const filmsLocal = new LocalStorage("films");
-  const searchQueryMoviesLocal = new LocalStorage("search-query-movies", {
-    film: "",
-    short: false,
-  });
   const searchQuerySavedMoviesLocal = new LocalStorage(
     "search-query-saved-movies",
     { film: "", short: false }
   );
+  const searchQueryMoviesLocal = new LocalStorage("search-query-movies", {
+    film: "",
+    short: false,
+  });
 
   useEffect(() => {
     setIsFetchError(false);
@@ -59,7 +50,7 @@ export const App = () => {
     handleLoginToken();
     // eslint-disable-next-line
   }, []);
-  // Вход по токену
+
   const handleLoginToken = () => {
     const token = jwtLocal.load();
     if (token) {
@@ -86,6 +77,7 @@ export const App = () => {
 
   const handleLogin = (email, password) => {
     setIsFetchError(false);
+
     mainApi
       .signin({ email, password })
       .then((res) => {
@@ -106,7 +98,6 @@ export const App = () => {
     return moviesApi.getMovies();
   }
 
-  // Получить данные пользовотеля
   function getUserInfo(token) {
     mainApi
       .getUserInfo(token)
@@ -115,15 +106,15 @@ export const App = () => {
         setCurrentUser(user);
       })
       .catch(() => {
-        showAttention(reports.attentionMessages.error.get_user);
-        throw new Error();
+        // showAttention(reports.attentionMessages.error.get_user);
+        // throw new Error();
+        setIsPreloader(false);
       })
       .finally(() => {
         setIsPreloader(false);
       });
   }
 
-  // Обновить данные пользовотеля
   function handleUpdateUser(name, email) {
     return mainApi
       .updateUserInfo({ name, email }, token)

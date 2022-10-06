@@ -13,6 +13,7 @@ export const useInputt = (initialValue, validations) => {
   const valid = useValidation(value, validations);
   const { errorsKit, inputValid } = valid;
   const errorMessages = errorsKit.messages.message;
+  
   const handleChange = (e) => {
     //убирает имеющиеся значения
     e.persist();

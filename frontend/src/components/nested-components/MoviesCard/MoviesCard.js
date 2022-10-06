@@ -1,15 +1,16 @@
-import React, { useEffect, useState }from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./MoviesCard.css";
 
 import { base_url } from "../../../utils/constants";
 import { formatDuration } from "../../../utils/formatDuration";
 
-export const MoviesCard =({ film, handleClickLikeButton })=> {
+export const MoviesCard = ({ film, handleClickLikeButton }) => {
   const [filmId, setFilmId] = useState("");
   const isSavedMovies = useHistory().location.pathname === "/saved-movies";
   const imageUrl =
-    film.thumbnail || `${base_url}/${film.image.formats.thumbnail.url}`;
+    `${base_url}/${film.image.url}` ||
+    `${base_url}/${film.image.formats.thumbnail.url}`;
 
   useEffect(() => {
     const filmId = film._id;
@@ -69,5 +70,4 @@ export const MoviesCard =({ film, handleClickLikeButton })=> {
       </a>
     </li>
   );
-}
-
+};

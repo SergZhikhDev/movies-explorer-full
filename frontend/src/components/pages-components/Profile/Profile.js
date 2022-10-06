@@ -1,17 +1,15 @@
-import React from "react";
-import { useContext, useState, useCallback } from "react";
+import React, { useContext, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 
-import Header from "../../nested-components/Header/Header";
-import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
 import "./Profile.css";
 
-import {ErrorText} from "../../nested-components/ErrorText/ErrorText";
+import Header from "../../nested-components/Header/Header";
+import { ErrorText } from "../../nested-components/ErrorText/ErrorText";
+import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
+import { useInputt } from "../../../hooks/useInput";
 import { config } from "../../../utils/constants";
 
-import { useInputt } from "../../../hooks/useInput";
-
-function Profile({ handleUpdateUser, currentUser, onSignOut }) {
+export const Profile=({ handleUpdateUser, currentUser, onSignOut })=> {
   const { isFetchError } = useContext(CurrentUserContext);
   const [disableInput, setDisableInput] = useState(true);
   const name = useInputt("", config.name);
@@ -43,11 +41,11 @@ function Profile({ handleUpdateUser, currentUser, onSignOut }) {
       noValidate
       onSubmit={onSubmit}
     >
-      <div className=' form__header_type_profile'>
+      <form className='form__admin form__admin_type_profile '>
+        {/* <div className=' form__header_type_profile'> */}
         <Header />
-      </div>
-      <div className='form__main form__main_type_profile '>
-        <form className='form__admin form__admin_type_profile '>
+        {/* </div> */}
+        <div className='form__main form__main_type_profile '>
           <div className='form__main-container'>
             <h3 className=' form__title'>{`Привет, ${currentUser.name}!`}</h3>
             <fieldset className=' form__input-container form__input-container_ctrl_texts'>
@@ -139,20 +137,19 @@ function Profile({ handleUpdateUser, currentUser, onSignOut }) {
               <ErrorText type='auth-button'>Что-то пошло не так...</ErrorText>
             )}
           </fieldset>
-        </form>
-      </div>
+        </div>
 
-      <div className='form__footer form__footer_type_profile '>
-        <Link
-          to='/'
-          className='form__button form__button_out '
-          onClick={signOut}
-        >
-          Выйти из аккаунта
-        </Link>
-      </div>
+        <div className='form__footer form__footer_type_profile '>
+          <Link
+            to='/'
+            className='form__button form__button_out '
+            onClick={signOut}
+          >
+            Выйти из аккаунта
+          </Link>
+        </div>
+      </form>
     </main>
   );
 }
 
-export default Profile;

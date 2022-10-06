@@ -1,15 +1,12 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./SearchForm.css";
 
+import { ErrorText } from "../ErrorText/ErrorText";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-
-import {ErrorText} from "../ErrorText/ErrorText";
-
 import { useFormWithValidation } from "../../../hooks/useFormWithValidation";
 
-function SearchForm({ searchFilms, searchQueryLocal }) {
+export const SearchForm = ({ searchFilms, searchQueryLocal }) => {
   const startValue = { film: "", short: false };
 
   const { values, isValid, handleChange, setValues, setIsValid } =
@@ -23,7 +20,6 @@ function SearchForm({ searchFilms, searchQueryLocal }) {
     setValues(searchQuery);
     if (searchQuery) setIsValid(true);
   }, [searchQueryLocal, setIsValid, setValues]);
-
 
   function onChangeCheckbox(evt) {
     const newValues = { ...values, short: evt.target.checked };
@@ -45,7 +41,6 @@ function SearchForm({ searchFilms, searchQueryLocal }) {
     }
   }
 
-  console.log(values.film)
   return (
     <section className='search'>
       <form className='search__form' onSubmit={handleSubmitForm} noValidate>
@@ -58,7 +53,7 @@ function SearchForm({ searchFilms, searchQueryLocal }) {
               placeholder='Фильм'
               required
               id='search-movie'
-              value={values.film || ''}
+              value={values.film || ""}
               onChange={handleChange}
             />
           </fieldset>
@@ -71,7 +66,6 @@ function SearchForm({ searchFilms, searchQueryLocal }) {
               <div className='search__button ' />
             </button>
           </fieldset>
-
         </div>
         <hr className='search__line line line_search'></hr>
         <div className='search__error'>
@@ -89,6 +83,4 @@ function SearchForm({ searchFilms, searchQueryLocal }) {
       </form>
     </section>
   );
-}
-
-export default SearchForm;
+};

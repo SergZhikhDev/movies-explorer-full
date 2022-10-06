@@ -15,6 +15,7 @@ function Login(props) {
   const { isFetchError } = useContext(CurrentUserContext);
   const email = useInputt("", config.email);
   const password = useInputt("", config.password);
+
   const onSubmit = (e) => {
     e.preventDefault(e);
     props.handleLogin(email.value, password.value);
@@ -22,13 +23,13 @@ function Login(props) {
 
   return (
     
-    <main className='form login sfp_type_reg hp' onSubmit={onSubmit}>
+    <main className='form login sfp_type_reg hp' >
       <div className='form__header form__header_type_auth '>
         <Logo />
       </div>
 
       <div className='form__container form__container_type_auth'>
-        <form className='form__admin form__admin_type_auth '>
+        <form className='form__admin form__admin_type_auth 'onSubmit={onSubmit}>
           <h3 className='form__heading form__heading_type_auth'>
             Рады видеть!
           </h3>

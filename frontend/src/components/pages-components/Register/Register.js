@@ -4,7 +4,7 @@ import "./Register.css";
 
 import Logo from "../../nested-components/Logo/Logo";
 import { Link } from "react-router-dom";
-import {ErrorText} from "../../nested-components/ErrorText/ErrorText";
+import { ErrorText } from "../../nested-components/ErrorText/ErrorText";
 import { config } from "../../../utils/constants";
 
 import { useInputt } from "../../../hooks/useInput";
@@ -17,32 +17,31 @@ export const Register = (props) => {
   const email = useInputt("", config.email);
   const password = useInputt("", config.password);
 
-
   const onSubmit = (e) => {
     e.preventDefault(e);
     props.handleRegister(name.value, email.value, password.value);
   };
   return (
     <>
-    <div className='form__header form__header_type_auth'>
+      <main className='form register sfp_type_reg hp'>
+        <div className='form__header form__header_type_auth'>
           <Logo />
         </div>
-      <form className='form register sfp_type_reg hp' onSubmit={onSubmit}>
-        
-
-        <div className='form__container form__container_type_auth'>
-          <main className='form__admin form__admin_type_auth'>
+        <form className='form__admin form__admin_type_auth' onSubmit={onSubmit}>
+          <div className='form__container form__container_type_auth'>
             <h3 className='form__heading form__heading_type_auth'>
               Добро пожаловать!
             </h3>
-            {/* <fieldset className='form__input-container form__input-container_type_auth'> */}
-              <label className='form__label form__label_type_auth'>Имя
-                {/* <span className='form__text form__text_type_auth'>  </span> */}
+            <fieldset className='form__input-container form__input-container_type_auth'>
+              <label className='form__label form__label_type_auth'>
+                Имя
+                <span className='form__text form__text_type_auth'> </span>
                 <input
                   className='form__item form__item_type_auth form__item_el_name form__item_el_name_type_auth'
                   onChange={name.handleChange}
                   value={name.value}
                   onClick={name.onClick}
+                  onTouchStart={name.onClick}
                   onBlur={name.onBlur}
                   name='name'
                   type='text'
@@ -57,8 +56,10 @@ export const Register = (props) => {
                   )}
                 </span>
               </label>
-              <label className='form__label form__label_type_auth'> Email
-                {/* <span className='form__text form__text_type_auth'> </span> */}
+              <label className='form__label form__label_type_auth'>
+                {" "}
+                Email
+                <span className='form__text form__text_type_auth'> </span>
                 <input
                   className='form__item form__item_type_auth form__item_el_email form__item_el_email_type_auth'
                   onChange={email.handleChange}
@@ -78,8 +79,9 @@ export const Register = (props) => {
                   )}
                 </span>
               </label>
-              <label className='form__label form__label_type_auth'>Пароль
-                {/* <span className='form__text form__text_type_auth'></span> */}
+              <label className='form__label form__label_type_auth'>
+                Пароль
+                <span className='form__text form__text_type_auth'></span>
                 <input
                   className='form__item form__item_type_auth form__item_type_auth_error form__item_el_name form__item_el_name_type_auth'
                   onChange={password.handleChange}
@@ -99,8 +101,8 @@ export const Register = (props) => {
                   )}
                 </span>
               </label>
-            {/* </fieldset> */}
-            {/* <fieldset className='form__handlers form__handlers_type_auth'> */}
+            </fieldset>
+            <fieldset className='form__handlers form__handlers_type_auth'>
               <label className='form__label form__label_el_button'>
                 <input type='submit' className='form__item invisible' />
                 <button
@@ -119,17 +121,17 @@ export const Register = (props) => {
               {isFetchError && (
                 <ErrorText type='auth-button'>Что-то пошло не так...</ErrorText>
               )}
-            {/* </fieldset> */}
-          </main>
-        </div>
-        <div className='form__footer form__footer_type_auth'>
-          <p className='form__question'> Уже зарегистрированы? </p>
-          <Link className='form__login-link' to='signin'>
-            {" "}
-            Войти{" "}
-          </Link>
-        </div>
-      </form>
+            </fieldset>
+          </div>
+          <div className='form__footer form__footer_type_auth'>
+            <p className='form__question'> Уже зарегистрированы? </p>
+            <Link className='form__login-link' to='signin'>
+              {" "}
+              Войти{" "}
+            </Link>
+          </div>
+        </form>
+      </main>
     </>
   );
 };

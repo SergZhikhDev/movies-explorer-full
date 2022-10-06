@@ -1,20 +1,34 @@
-.attention {
+.attention__container{
+    width: 100vw;
+    height: 100vh;
     position: fixed;
-    top: 75px;
-    right: 75px;
-    background-color: #3ddc84bf;
+    /* position: sticky; */
+    /* top: 100px; */
+    /* left: auto; */
+    background-color: #fff0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .attention__container_hidden{
+ display: none;
+  }
+ 
+.attention {
+    background-color: #3ddc84;
     border-radius: 20px;
-    padding: 15px 25px;
+    padding: 51px 50px;
     transition: all .5s ease-in;
-    /* visibility: hidden; */
-    opacity: 0;
+    opacity: 1;
     max-width: 350px;
 }
 
-.attention_active {
+/* .attention_active {
     visibility: visible;
     opacity: 1;
-}
+} */
 
 .attention__text {
     color: #fff;
