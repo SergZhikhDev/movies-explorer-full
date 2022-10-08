@@ -1,37 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./FilterCheckbox.css";
-import { useFormWithValidation } from "../../../hooks/useFormWithValidation";
 
-function FilterCheckbox(props) {
-  const startValue = { film: "", short: false };
-
-  const { values, handleChange } = useFormWithValidation(startValue);
-
+export const FilterCheckbox = ({ onChangeCheckbox, inputValid }) => {
+  const [checked, setChecked] = useState(false);
   const handleChangeCheckbox = (evt) => {
-    evt.preventDefault();
-    console.log('click')
-    handleChange(evt);
-    props.onChangeCheckbox(evt);
+    !checked ? setChecked(true) : setChecked(false);
+    onChangeCheckbox(evt);
   };
 
   return (
     <div className='filter-checkbox'>
       <fieldset className='filter-checkbox__input-container filter-checkbox__input-container_checkbox'>
-        <label className='filter-checkbox__label checkbox'>
+        <label
+          className='filter-checkbox__label checkbox'
+          disabled={!inputValid}
+        >
           <input
             className='checkbox__invisible invisible'
             type='checkbox'
             name='short'
-            checked={values.short || ''}
+            checked={checked}
             onChange={handleChangeCheckbox}
+            disabled={!inputValid}
           />
-          <span className='checkbox-switch'> </span>
+          <span className='checkbox-switch' ></span>
           <span className='checkbox__label-text'>Короткометражки</span>
         </label>
       </fieldset>
     </div>
   );
-}
-
-export default FilterCheckbox;
+};

@@ -7,10 +7,15 @@ import { formatDuration } from "../../../utils/formatDuration";
 
 export const MoviesCard = ({ film, handleClickLikeButton }) => {
   const [filmId, setFilmId] = useState("");
+
   const isSavedMovies = useHistory().location.pathname === "/saved-movies";
-  const imageUrl =
-    `${base_url}/${film.image.url}` ||
-    `${base_url}/${film.image.formats.thumbnail.url}`;
+  console.log(film);
+  console.log(film.image);
+  let imageUrl;
+
+  !film.image.url
+    ? (imageUrl = `${film.image}`)
+    : (imageUrl = `${base_url}/${film.image.url}`);
 
   useEffect(() => {
     const filmId = film._id;

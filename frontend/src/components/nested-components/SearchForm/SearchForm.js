@@ -1,44 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import "./SearchForm.css";
 
 import { ErrorText } from "../ErrorText/ErrorText";
-import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import { useFormWithValidation } from "../../../hooks/useFormWithValidation";
+import { FilterCheckbox } from "../FilterCheckbox/FilterCheckbox";
+import { useInputt } from "../../../hooks/useInput";
+import { config } from "../../../utils/constants";
 
 export const SearchForm = ({ searchFilms, searchQueryLocal }) => {
-  const startValue = { film: "", short: false };
+  const film = useInputt({ field: "", short: false }, config.etc);
 
-  const { values, isValid, handleChange, setValues, setIsValid } =
-    useFormWithValidation(startValue);
-  // Состояние ошибки поиска
-  const [isSearchError, setIsSearchError] = useState(false);
-
-  useEffect(() => {
-    const searchQuery = searchQueryLocal.load();
-
-    setValues(searchQuery);
-    if (searchQuery) setIsValid(true);
-  }, [searchQueryLocal, setIsValid, setValues]);
-
-  function onChangeCheckbox(evt) {
-    const newValues = { ...values, short: evt.target.checked };
-
-    handleChange(evt);
+  function onChangeCheckbox(e) {
+    const newValues = { ...film.value, short: e.target.checked };
     searchFilms(newValues);
     searchQueryLocal.save(newValues);
   }
 
   function handleSubmitForm(evt) {
     evt.preventDefault();
-    searchQueryLocal.save(values);
+    const newValues = { ...film.value, short: evt.target.checked };
+    searchQueryLocal.save(newValues);
 
-    if (!isValid) {
-      setIsSearchError(true);
-    } else {
-      setIsSearchError(false);
-      searchFilms(values);
-    }
+    searchFilms(newValues);
   }
 
   return (
@@ -49,36 +32,36 @@ export const SearchForm = ({ searchFilms, searchQueryLocal }) => {
             <input
               type='text'
               className='search__movie'
+              autoComplete='off'
               name='film'
               placeholder='Фильм'
               required
               id='search-movie'
-              value={values.film || ""}
-              onChange={handleChange}
+              value={film.value.field || ""}
+              onChange={film.handleChange}
+              onBlur={film.onBlur}
+              ref={film.callbackRef}
             />
           </fieldset>
           <fieldset className='search__input-container search__input-container_btn submit-button'>
-            <button type='submit' className='search__label submit-button'>
-              <div
-                type='submit'
-                className='submit-button__invisible invisible'
-              />
-              <div className='search__button ' />
-            </button>
+            <button
+              type='submit'
+              className='search__button '
+              disabled={!film.inputValid}
+            ></button>
           </fieldset>
         </div>
         <hr className='search__line line line_search'></hr>
         <div className='search__error'>
           {" "}
-          {isSearchError && (
+          {film.errorMessages && film.isDirty && (
             <ErrorText type='search'>Нужно ввести ключевое слово</ErrorText>
           )}
         </div>
 
         <FilterCheckbox
           onChangeCheckbox={onChangeCheckbox}
-          searchFilms={searchFilms}
-          searchQueryLocal={searchQueryLocal}
+          inputValid={film.inputValid}
         />
       </form>
     </section>

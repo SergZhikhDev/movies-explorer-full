@@ -18,7 +18,7 @@ function Login(props) {
 
   const onSubmit = (e) => {
     e.preventDefault(e);
-    props.handleLogin(email.value, password.value);
+    props.handleLogin(email.value.field, password.value.field);
   };
 
   return (
@@ -39,7 +39,7 @@ function Login(props) {
               <input
                 className='form__item form__item_type_auth form__item_el_email form__item_el_email_type_auth'
                 onChange={email.handleChange}
-                value={email.value}
+                value={email.value.field || ''}
                 onClick={email.onClick}
                 onBlur={email.onBlur}
                 name='email'
@@ -60,7 +60,7 @@ function Login(props) {
               <input
                 className='form__item form__item_type_auth form__item_el_name form__item_el_name_type_auth'
                 onChange={password.handleChange}
-                value={password.value}
+                value={password.value.field || ''}
                 onClick={password.onClick}
                 onBlur={password.onBlur}
                 name='password'

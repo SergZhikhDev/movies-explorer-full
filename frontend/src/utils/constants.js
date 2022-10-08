@@ -5,9 +5,10 @@ const regex = {
     /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]/,
 };
 const config = {
-  name: { isEmpty: true, minLength: 12, maxLength: 16, isName: true },
+  name: { isEmpty: true, minLength: 2, maxLength: 16, isName: true },
   email: { isEmpty: true, isEmail: true },
-  password: { isEmpty: true, minLength: 10, maxLength: 12, isPass: true },
+  password: { isEmpty: true, minLength: 6, maxLength: 10, isPass: true },
+  etc:{isEmpty: true},
 };
 const reports = {
   apiMessages: {

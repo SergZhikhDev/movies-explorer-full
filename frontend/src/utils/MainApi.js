@@ -23,7 +23,6 @@ class Api {
   }
 
   signin(user) {
-    console.log(252525)
     const body = JSON.stringify(user);
     return this._fetch("/api/signin", "POST", body);
   }

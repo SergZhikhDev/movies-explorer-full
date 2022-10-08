@@ -35,10 +35,11 @@ export const App = () => {
   const filmsLocal = new LocalStorage("films");
   const searchQuerySavedMoviesLocal = new LocalStorage(
     "search-query-saved-movies",
-    { film: "", short: false }
+    { field: "", short: false }
   );
-  const searchQueryMoviesLocal = new LocalStorage("search-query-movies", {
-    film: "",
+  const searchQueryMoviesLocal = new LocalStorage(
+    "search-query-movies", {
+    field: "",
     short: false,
   });
 
@@ -99,6 +100,7 @@ export const App = () => {
   }
 
   function getUserInfo(token) {
+         
     mainApi
       .getUserInfo(token)
       .then((user) => {

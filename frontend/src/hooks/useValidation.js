@@ -4,7 +4,6 @@ import { useConstant } from "./useConstants";
 
 export const useValidation = (value, validations) => {
   const { reports, onClack } = useConstant(value, validations);
-
   const [errorsKit, setErrorsKit] = useState({
     errors: {
       emptyError: true, //true- поле пустое. есть ошибка
@@ -34,7 +33,7 @@ export const useValidation = (value, validations) => {
     for (const validation in validations) {
       switch (validation) {
         case "isEmpty":
-          value
+          value.field
             ? setErrorsKit({
                 errors: { ...kitErr, emptyError: false },
                 messages: { ...kitMess, message: null },
@@ -46,7 +45,7 @@ export const useValidation = (value, validations) => {
           break;
 
         case "minLength":
-          !emptyErr && value.length < validations[validation]
+          !emptyErr && value.field.length < validations[validation]
             ? setErrorsKit((errorsKit) => ({
                 errors: { ...errorsKit.errors, minLengthError: true },
                 messages: {
@@ -73,7 +72,7 @@ export const useValidation = (value, validations) => {
           break;
 
         case "maxLength":
-          !emptyErr && value.length > validations[validation]
+          !emptyErr && value.field.length > validations[validation]
             ? setErrorsKit((errorsKit) => ({
                 errors: { ...errorsKit.errors, maxLengthError: true },
                 messages: {
@@ -108,7 +107,7 @@ export const useValidation = (value, validations) => {
           break;
 
         case "isEmail":
-          !emptyErr && !regex.email.test(String(value).toLowerCase())
+          !emptyErr && !regex.email.test(String(value.field).toLowerCase())
             ? setErrorsKit((errorsKit) => ({
                 errors: { ...errorsKit.errors, emailError: true },
                 messages: {
@@ -134,7 +133,7 @@ export const useValidation = (value, validations) => {
 
           break;
         case "isName":
-          !regex.name.test(String(value).toLowerCase()) && !emptyErr
+          !regex.name.test(String(value.field).toLowerCase()) && !emptyErr
             ? setErrorsKit((errorsKit) => ({
                 errors: { ...errorsKit.errors, nameError: true },
                 messages: {
@@ -142,7 +141,7 @@ export const useValidation = (value, validations) => {
                   message: errMess.nameError,
                 },
               }))
-            : regex.name.test(String(value).toLowerCase()) && minLhErr
+            : regex.name.test(String(value.field).toLowerCase()) && minLhErr
             ? setErrorsKit((errorsKit) => ({
                 errors: { ...errorsKit.errors, nameError: false },
                 messages: {
@@ -150,7 +149,7 @@ export const useValidation = (value, validations) => {
                   message: errMess.minLengthError,
                 },
               }))
-            : regex.name.test(String(value).toLowerCase()) && maxLhErr
+            : regex.name.test(String(value.field).toLowerCase()) && maxLhErr
             ? setErrorsKit((errorsKit) => ({
                 errors: { ...errorsKit.errors, nameError: false },
                 messages: {
@@ -177,7 +176,7 @@ export const useValidation = (value, validations) => {
           break;
 
         case "isPass":
-          !regex.password.test(String(value))
+          !regex.password.test(String(value.field))
             ? setErrorsKit((errorsKit) => ({
                 errors: { ...errorsKit.errors, passwordError: true },
                 messages: {
@@ -185,7 +184,7 @@ export const useValidation = (value, validations) => {
                   message: errMess.passwordError,
                 },
               }))
-            : regex.password.test(String(value)) && minLhErr
+            : regex.password.test(String(value.field)) && minLhErr
             ? setErrorsKit((errorsKit) => ({
                 errors: { ...errorsKit.errors, passwordError: false },
                 messages: {
@@ -193,7 +192,7 @@ export const useValidation = (value, validations) => {
                   message: errMess.minLengthError,
                 },
               }))
-            : regex.password.test(String(value)) && maxLhErr
+            : regex.password.test(String(value.field)) && maxLhErr
             ? setErrorsKit((errorsKit) => ({
                 errors: { ...errorsKit.errors, passwordError: false },
                 messages: {
@@ -201,7 +200,7 @@ export const useValidation = (value, validations) => {
                   message: errMess.maxLengthError,
                 },
               }))
-            : !regex.password.test(String(value)) && emptyErr
+            : !regex.password.test(String(value.field)) && emptyErr
             ? setErrorsKit((errorsKit) => ({
                 errors: { ...errorsKit.errors, passwordError: false },
                 messages: {

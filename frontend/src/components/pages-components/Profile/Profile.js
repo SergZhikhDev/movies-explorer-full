@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./Profile.css";
@@ -9,7 +9,7 @@ import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
 import { useInputt } from "../../../hooks/useInput";
 import { config } from "../../../utils/constants";
 
-export const Profile=({ handleUpdateUser, currentUser, onSignOut })=> {
+export const Profile = ({ handleUpdateUser, currentUser, onSignOut }) => {
   const { isFetchError } = useContext(CurrentUserContext);
   const [disableInput, setDisableInput] = useState(true);
   const name = useInputt("", config.name);
@@ -27,13 +27,8 @@ export const Profile=({ handleUpdateUser, currentUser, onSignOut })=> {
 
   function onSubmit(e) {
     e.preventDefault();
-    handleUpdateUser(name.value, email.value);
+    handleUpdateUser(name.value.field, email.value.field);
   }
-  const callbackRef = useCallback((inputElement) => {
-    if (inputElement) {
-      inputElement.focus();
-    }
-  }, []);
 
   return (
     <main
@@ -42,9 +37,7 @@ export const Profile=({ handleUpdateUser, currentUser, onSignOut })=> {
       onSubmit={onSubmit}
     >
       <form className='form__admin form__admin_type_profile '>
-        {/* <div className=' form__header_type_profile'> */}
         <Header />
-        {/* </div> */}
         <div className='form__main form__main_type_profile '>
           <div className='form__main-container'>
             <h3 className=' form__title'>{`Привет, ${currentUser.name}!`}</h3>
@@ -58,14 +51,14 @@ export const Profile=({ handleUpdateUser, currentUser, onSignOut })=> {
                   <input
                     className='form__item form__item_el_name'
                     placeholder={currentUser.name}
-                    value={name.value}
+                    value={name.value.field || ""}
                     disabled={disableInput}
                   />
                 ) : (
                   <input
                     className='form__item form__item_el_name'
                     onChange={name.handleChange}
-                    value={name.value}
+                    value={name.value.field || ""}
                     onClick={name.onClick}
                     onBlur={name.onBlur}
                     name='name'
@@ -73,7 +66,7 @@ export const Profile=({ handleUpdateUser, currentUser, onSignOut })=> {
                     autoComplete='off'
                     placeholder={currentUser.name}
                     required
-                    ref={callbackRef}
+                    ref={name.callbackRef}
                   />
                 )}
               </label>
@@ -84,7 +77,7 @@ export const Profile=({ handleUpdateUser, currentUser, onSignOut })=> {
                 <input
                   className='form__item form__item_el_email'
                   onChange={email.handleChange}
-                  value={email.value}
+                  value={email.value.field || ""}
                   onClick={email.onClick}
                   onBlur={email.onBlur}
                   name='email'
@@ -151,5 +144,4 @@ export const Profile=({ handleUpdateUser, currentUser, onSignOut })=> {
       </form>
     </main>
   );
-}
-
+};

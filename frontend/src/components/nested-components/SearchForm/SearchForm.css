@@ -33,6 +33,10 @@
   height: 34px;
   background-color: #202020;
 }
+
+.search__button[disabled]{
+  background-image: url(../../../images/find-grey.svg);
+}
 .search__error{
   margin-top: 10px;
   height: 12px;
