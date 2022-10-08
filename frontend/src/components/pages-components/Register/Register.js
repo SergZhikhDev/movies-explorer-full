@@ -100,7 +100,7 @@ export const Register = (props) => {
                   onChange={password.handleChange}
                   value={password.value.field || ""}
                   onClick={password.onClick}
-                  onTouchStart={alert(555,"onTouchStart")}
+                  onTouchStart={password.onClick}
                   onBlur={password.onBlur}
                   name='password'
                   type={passwordType}
