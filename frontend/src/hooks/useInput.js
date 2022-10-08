@@ -21,7 +21,7 @@ export const useInputt = (initialValue, validations) => {
     setValue({ ...value, field: e.target.value });
   };
   const onClick = (e) => {
-    setisDirty(false);
+    // setisDirty(false);
     valid.onClack(e);
   };
 

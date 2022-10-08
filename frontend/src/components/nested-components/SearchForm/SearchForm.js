@@ -47,14 +47,13 @@ export const SearchForm = ({ searchFilms, searchQueryLocal }) => {
             <button
               type='submit'
               className='search__button '
-              disabled={!film.inputValid}
+              disabled={!localStorage.films && !film.inputValid}
             ></button>
           </fieldset>
         </div>
         <hr className='search__line line line_search'></hr>
         <div className='search__error'>
-          {" "}
-          {film.errorMessages && film.isDirty && (
+          {film.isDirty && film.errorMessages && (
             <ErrorText type='search'>Нужно ввести ключевое слово</ErrorText>
           )}
         </div>

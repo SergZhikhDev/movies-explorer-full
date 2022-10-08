@@ -2,19 +2,21 @@ import React, { useState } from "react";
 
 import "./FilterCheckbox.css";
 
-export const FilterCheckbox = ({ onChangeCheckbox, inputValid }) => {
+export const FilterCheckbox = ({ onChangeCheckbox, inputValid,}) => {
   const [checked, setChecked] = useState(false);
-  const handleChangeCheckbox = (evt) => {
+
+  const handleChangeCheckbox = (e) => {
     !checked ? setChecked(true) : setChecked(false);
-    onChangeCheckbox(evt);
+    onChangeCheckbox(e);
   };
 
-  return (
+
+ return (
     <div className='filter-checkbox'>
       <fieldset className='filter-checkbox__input-container filter-checkbox__input-container_checkbox'>
         <label
           className='filter-checkbox__label checkbox'
-          disabled={!inputValid}
+          disabled={!localStorage.films && !inputValid}
         >
           <input
             className='checkbox__invisible invisible'
@@ -22,7 +24,7 @@ export const FilterCheckbox = ({ onChangeCheckbox, inputValid }) => {
             name='short'
             checked={checked}
             onChange={handleChangeCheckbox}
-            disabled={!inputValid}
+            disabled={!localStorage.films && !inputValid}
           />
           <span className='checkbox-switch' ></span>
           <span className='checkbox__label-text'>Короткометражки</span>
@@ -31,3 +33,18 @@ export const FilterCheckbox = ({ onChangeCheckbox, inputValid }) => {
     </div>
   );
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

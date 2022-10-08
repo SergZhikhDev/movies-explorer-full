@@ -176,7 +176,7 @@ export const useValidation = (value, validations) => {
           break;
 
         case "isPass":
-          !regex.password.test(String(value.field))
+          !regex.password.test(String(value.field)) && !emptyErr
             ? setErrorsKit((errorsKit) => ({
                 errors: { ...errorsKit.errors, passwordError: true },
                 messages: {
@@ -200,7 +200,7 @@ export const useValidation = (value, validations) => {
                   message: errMess.maxLengthError,
                 },
               }))
-            : !regex.password.test(String(value.field)) && emptyErr
+            : regex.password.test(String(value.field)) && emptyErr
             ? setErrorsKit((errorsKit) => ({
                 errors: { ...errorsKit.errors, passwordError: false },
                 messages: {
@@ -209,7 +209,7 @@ export const useValidation = (value, validations) => {
                 },
               }))
             : setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, nameError: false },
+                errors: { ...errorsKit.errors, passwordError: false },
                 messages: {
                   ...errorsKit.messages,
                   message: null,

@@ -100,7 +100,8 @@
 
 ## *Ссылки:*
 
-* Ссылка на пул-реквест [pull requests](https://github.com/SergZhikhDev/movies-explorer-frontend/compare/level-3?expand=1)
+* Ссылка на пул-реквест [pull requests](https://github.com/SergZhikhDev/movies-explorer-frontend/pull/2)
+
 * Домен по которому доступно приложение [http://front-szh-dpl.students.nomorepartiesxyz.ru](http://front-szh-dpl.students.nomorepartiesxyz.ru)
 * Ссылка на индивидульный [макет](https://www.figma.com/file/abwrvjILujw8VQJcEDPrSN/Diploma-(Copy)?node-id=891%3A3857), по которому верстался проект
 

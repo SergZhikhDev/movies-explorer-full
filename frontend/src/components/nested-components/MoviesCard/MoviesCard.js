@@ -9,8 +9,7 @@ export const MoviesCard = ({ film, handleClickLikeButton }) => {
   const [filmId, setFilmId] = useState("");
 
   const isSavedMovies = useHistory().location.pathname === "/saved-movies";
-  console.log(film);
-  console.log(film.image);
+
   let imageUrl;
 
   !film.image.url
