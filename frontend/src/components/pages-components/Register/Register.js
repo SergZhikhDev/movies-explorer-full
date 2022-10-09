@@ -53,8 +53,7 @@ export const Register = (props) => {
                   className='form__item form__item_type_auth form__item_el_name form__item_el_name_type_auth'
                   onChange={name.handleChange}
                   value={name.value.field || ""}
-                  onClick={name.onClick}
-                  onTouchStart={name.onClick}
+                  // onClick={name.onClick}
                   onBlur={name.onBlur}
                   name='name'
                   type='text'
@@ -77,7 +76,7 @@ export const Register = (props) => {
                   className='form__item form__item_type_auth form__item_el_email form__item_el_email_type_auth'
                   onChange={email.handleChange}
                   value={email.value.field || ""}
-                  onClick={email.onClick}
+                  // onClick={email.onClick}
                   onBlur={email.onBlur}
                   name='email'
                   type='email'
@@ -99,8 +98,8 @@ export const Register = (props) => {
                   className='form__item form__item_type_auth form__item_type_auth_error form__item_el_name form__item_el_name_type_auth'
                   onChange={password.handleChange}
                   value={password.value.field || ""}
-                  onClick={password.onClick}
-                  onTouchStart={password.onClick}
+                  // onClick={password.onClick}
+                  // onTouchStart={password.onClick}
                   onBlur={password.onBlur}
                   name='password'
                   type={passwordType}

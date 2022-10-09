@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export const useConstant = (value, validations) => {
   const [nameField, setNameField] = useState("");
+  
   const onClack = (e) => {
     setNameField(e.target.name);
   };

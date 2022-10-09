@@ -19,11 +19,12 @@ export const useInputt = (initialValue, validations) => {
     e.persist();
     setisDirty(true);
     setValue({ ...value, field: e.target.value });
+     valid.onClack(e);
   };
   const onClick = (e) => {
     e.preventDefault(e);
     // setisDirty(false);
-    valid.onClack(e);
+   
   };
 
   const onBlur = (e) => {
