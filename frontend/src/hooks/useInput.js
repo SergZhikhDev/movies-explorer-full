@@ -28,9 +28,9 @@ export const useInputt = (initialValue, validations) => {
    
   };
 
-  // const onBlur = (e) => {
-  //   setisDirty(true);
-  // };
+  const onBlur = (e) => {
+    setisDirty(true);
+  };
 
   useEffect(() => {
     valid.inputValid &&
@@ -73,7 +73,7 @@ export const useInputt = (initialValue, validations) => {
     inputValid,
     readyForUpdate,
     needTwoChanges,
-    // onBlur,
+    onBlur,
     handleChange,
     onClick,
     setValue,

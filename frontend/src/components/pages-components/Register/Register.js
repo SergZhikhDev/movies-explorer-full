@@ -54,8 +54,8 @@ console.log(5)
                   onChange={name.handleChange}
                   value={name.value.field || ""}
                   // onClick={name.onClick}
-                  // onBlur={name.onBlur}
-                  onFocus={name.onClick}
+                  onBlur={name.onBlur}
+                  // onFocus={name.onClick}
                   name='name'
                   type='text'
                   autoComplete='off'
@@ -78,7 +78,7 @@ console.log(5)
                   onChange={email.handleChange}
                   value={email.value.field || ""}
                   // onClick={email.onClick}
-                  // onBlur={email.onBlur}
+                  onBlur={email.onBlur}
                   
                   name='email'
                   type='email'
@@ -102,7 +102,7 @@ console.log(5)
                   value={password.value.field || ""}
                   // onClick={password.onClick}
                   // onTouchStart={password.onClick}
-                  // onBlur={password.onBlur}
+                  onBlur={password.onBlur}
                   name='password'
                   type={passwordType}
                   autoComplete='off'
