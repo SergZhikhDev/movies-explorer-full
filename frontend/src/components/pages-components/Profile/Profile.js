@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "./Profile.css";
 
-import Header from "../../nested-components/Header/Header";
+import {Header} from "../../nested-components/Header/Header";
 import { ErrorText } from "../../nested-components/ErrorText/ErrorText";
 import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
 import { useInputt } from "../../../hooks/useInput";

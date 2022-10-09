@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 import "./Movies.css";
-import Header from "../../nested-components/Header/Header";
+import { Header } from "../../nested-components/Header/Header";
 import Footer from "../../nested-components/Footer/Footer";
 import { SearchForm } from "../../nested-components/SearchForm/SearchForm";
 import { MoviesCardList } from "../../nested-components/MoviesCardList/MoviesCardList";
@@ -40,7 +40,7 @@ function Movies({
   useEffect(() => {
     getLikeFilms();
     setCountViewFilms();
-    addResizeEvent();
+    // addResizeEvent();
     return () => removeResizeEvent();
     // eslint-disable-next-line
   }, []);
@@ -138,9 +138,9 @@ function Movies({
     setFiltredFilms(localFilms);
   }
 
-  function addResizeEvent() {
-    window.addEventListener("resize", setParamsCountFilms);
-  }
+  // function addResizeEvent() {
+  //   window.addEventListener("resize", setParamsCountFilms);
+  // }
 
   function removeResizeEvent() {
     window.removeEventListener("resize", setParamsCountFilms);

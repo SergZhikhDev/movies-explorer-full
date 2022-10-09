@@ -1,7 +1,7 @@
 import React from "react";
 import "./Techs.css";
 
-function Techs() {
+export const Techs = () => {
   return (
     <section className='project-technologies sp techs' id='techs'>
       <h2 className='techs__title section-title section-title_techs'>
@@ -24,6 +24,4 @@ function Techs() {
       </ul>
     </section>
   );
-}
-
-export default Techs;
+};

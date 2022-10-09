@@ -3,7 +3,7 @@ import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 
 import "./App.css";
 
-import Main from "../pages-components/Main/Main";
+import {Main} from "../pages-components/Main/Main";
 import Login from "../pages-components/Login/Login";
 import Movies from "../pages-components/Movies/Movies";
 import NotFound from "../pages-components/NotFound/NotFound";
