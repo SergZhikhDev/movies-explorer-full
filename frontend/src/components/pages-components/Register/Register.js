@@ -54,7 +54,7 @@ export const Register = (props) => {
                   onChange={name.handleChange}
                   value={name.value.field || ""}
                   // onClick={name.onClick}
-                  onBlur={name.onBlur}
+                  // onBlur={name.onBlur}
                   name='name'
                   type='text'
                   autoComplete='off'
@@ -77,7 +77,7 @@ export const Register = (props) => {
                   onChange={email.handleChange}
                   value={email.value.field || ""}
                   // onClick={email.onClick}
-                  onBlur={email.onBlur}
+                  // onBlur={email.onBlur}
                   name='email'
                   type='email'
                   autoComplete='off'
@@ -100,7 +100,7 @@ export const Register = (props) => {
                   value={password.value.field || ""}
                   // onClick={password.onClick}
                   // onTouchStart={password.onClick}
-                  onBlur={password.onBlur}
+                  // onBlur={password.onBlur}
                   name='password'
                   type={passwordType}
                   autoComplete='off'
