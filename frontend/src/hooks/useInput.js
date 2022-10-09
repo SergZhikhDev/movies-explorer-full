@@ -17,12 +17,13 @@ export const useInputt = (initialValue, validations) => {
   const handleChange = (e) => {
     //убирает имеющиеся значения
     // e.persist();
+     e.preventDefault(e);
     setisDirty(true);
     setValue({ ...value, field: e.target.value });
      valid.onClack(e);
   };
   const onClick = (e) => {
-    e.preventDefault(e);
+   
     // setisDirty(false);
    
   };
