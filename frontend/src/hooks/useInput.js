@@ -23,8 +23,8 @@ export const useInputt = (initialValue, validations) => {
      valid.onClack(e);
   };
   const onClick = (e) => {
-   
-    setisDirty(false);
+    e.focus();
+    // setisDirty(false);
    
   };
 

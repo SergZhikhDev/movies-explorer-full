@@ -53,7 +53,7 @@ console.log(5)
                   className='form__item form__item_type_auth form__item_el_name form__item_el_name_type_auth'
                   onChange={name.handleChange}
                   value={name.value.field || ""}
-                  // onClick={name.onClick}
+                 onClick={name.onClick}
                   onBlur={name.onBlur}
                   // onFocus={name.onClick}
                   name='name'
@@ -79,7 +79,7 @@ console.log(5)
                   value={email.value.field || ""}
                   // onClick={email.onClick}
                   onBlur={email.onBlur}
-                  
+                  onTouchStart={password.onClick}
                   name='email'
                   type='email'
                   autoComplete='off'
@@ -100,8 +100,8 @@ console.log(5)
                   className='form__item form__item_type_auth form__item_type_auth_error form__item_el_name form__item_el_name_type_auth'
                   onChange={password.handleChange}
                   value={password.value.field || ""}
-                  // onClick={password.onClick}
-                  // onTouchStart={password.onClick}
+                  onClick={password.onClick}
+                  onTouchStart={password.onClick}
                   onBlur={password.onBlur}
                   name='password'
                   type={passwordType}
