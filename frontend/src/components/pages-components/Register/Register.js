@@ -33,7 +33,7 @@ export const Register = (props) => {
     }
     setPasswordType("password");
   };
-  //
+console.log(5)
   return (
     <main className='form register sfp_type_reg hp'>
       <div className='form__header form__header_type_auth'>
@@ -55,6 +55,7 @@ export const Register = (props) => {
                   value={name.value.field || ""}
                   // onClick={name.onClick}
                   // onBlur={name.onBlur}
+                  onFocus={name.onClick}
                   name='name'
                   type='text'
                   autoComplete='off'
@@ -78,6 +79,7 @@ export const Register = (props) => {
                   value={email.value.field || ""}
                   // onClick={email.onClick}
                   // onBlur={email.onBlur}
+                  
                   name='email'
                   type='email'
                   autoComplete='off'

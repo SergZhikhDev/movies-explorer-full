@@ -24,7 +24,7 @@ export const useInputt = (initialValue, validations) => {
   };
   const onClick = (e) => {
    
-    // setisDirty(false);
+    setisDirty(false);
    
   };
 
