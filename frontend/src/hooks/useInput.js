@@ -16,7 +16,7 @@ export const useInputt = (initialValue, validations) => {
   
   const handleChange = (e) => {
     //убирает имеющиеся значения
-    e.persist();
+    // e.persist();
     setisDirty(true);
     setValue({ ...value, field: e.target.value });
      valid.onClack(e);
