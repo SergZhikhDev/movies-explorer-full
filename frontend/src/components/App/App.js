@@ -19,8 +19,9 @@ import { mainApi } from "../../utils/MainApi";
 import { reports } from "../../utils/constants";
 import { moviesApi } from "../../utils/MoviesApi";
 import LocalStorage from "../../utils/LocalStorage";
-
+ 
 export const App = () => {
+  console.log('app',999)
   const [token, setToken] = useState("");
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -47,10 +48,10 @@ export const App = () => {
     setIsFetchError(false);
   }, [location]);
 
-  useEffect(() => {
-    handleLoginToken();
-    // eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+  //   handleLoginToken();
+  //   // eslint-disable-next-line
+  // }, []);
 
   const handleLoginToken = () => {
     const token = jwtLocal.load();

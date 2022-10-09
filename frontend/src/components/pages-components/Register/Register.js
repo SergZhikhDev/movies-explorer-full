@@ -59,10 +59,10 @@ console.log(5)
                   name='name'
                   type='text'
                   autoComplete='off'
-                  autoFocus='on'
+                  autoFocus={true}
                   placeholder='Имя'
                   required
-                  ref={name.callbackRef}
+                  // ref={name.callbackRef}
                 />
                 <hr className='form__line line line_form line_form_type_auth'></hr>
                 <span className='form__error' id='error-userName'>
