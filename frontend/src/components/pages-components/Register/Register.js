@@ -77,7 +77,7 @@ console.log(5)
                   className='form__item form__item_type_auth form__item_el_email form__item_el_email_type_auth'
                   onChange={email.handleChange}
                   value={email.value.field || ""}
-                  // onClick={email.onClick}
+                  onClick={email.onClick}
                   onBlur={email.onBlur}
                   onTouchStart={password.onClick}
                   name='email'

@@ -22,8 +22,9 @@ export const useInputt = (initialValue, validations) => {
     setValue({ ...value, field: e.target.value });
      valid.onClack(e);
   };
-  const onClick = (e) => {
-    e.focus();
+  const onClick = (input) => {
+    input.nativeEvent.target.autofocus=true
+    console.log(input.nativeEvent.target.autofocus)
     // setisDirty(false);
    
   };
