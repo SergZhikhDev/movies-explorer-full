@@ -23,8 +23,9 @@ export const useInputt = (initialValue, validations) => {
      valid.onClack(e);
   };
   const onClick = (input) => {
-    input.nativeEvent.target.autofocus=true
-    console.log(input.nativeEvent.target.autofocus)
+    // input.nativeEvent.target.autofocus=true
+    console.log(input.target.autofocus)
+
     // setisDirty(false);
    
   };
