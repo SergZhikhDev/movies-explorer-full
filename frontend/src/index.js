@@ -1,16 +1,20 @@
 import React from "react";
-import ReactDOM from "react-dom/";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom"; // импортируем BrowserRouter
 import "./index.css";
 import {App} from "./components/App/App";
+import reportWebVitals from "./reportWebVitals";
 
-ReactDOM.render(
-  <React.StrictMode>
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+
+root.render(
       <BrowserRouter>
+  <React.StrictMode>
         <App />
-      </BrowserRouter>
   </React.StrictMode>,
-    document.getElementById('root')
+      </BrowserRouter>
+    // document.getElementById('root')
 );
 
-
+reportWebVitals();

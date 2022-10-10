@@ -34,29 +34,29 @@ export const useInputt = (initialValue, validations) => {
     setisDirty(true);
   };
 
-  // useEffect(() => {
-  //   valid.inputValid &&
-  //   value !== currentUser.currentUser.name &&
-  //   value !== currentUser.currentUser.email
-  //     ? setReadyForUpdate(true)
-  //     : setReadyForUpdate(false);
-  // }, [
-  //   currentUser.currentUser.email,
-  //   currentUser.currentUser.name,
-  //   currentUser.email,
-  //   currentUser.name,
-  //   valid.inputValid,
-  //   value,
-  // ]);
+  useEffect(() => {
+    valid.inputValid &&
+    value !== currentUser.currentUser.name &&
+    value !== currentUser.currentUser.email
+      ? setReadyForUpdate(true)
+      : setReadyForUpdate(false);
+  }, [
+    currentUser.currentUser.email,
+    currentUser.currentUser.name,
+    currentUser.email,
+    currentUser.name,
+    valid.inputValid,
+    value,
+  ]);
 
-  // useEffect(() => {
-  //   (value !== currentUser.currentUser.name &&
-  //     value === currentUser.currentUser.email) ||
-  //   (value === currentUser.currentUser.name &&
-  //     value !== currentUser.currentUser.email)
-  //     ? setNeedTwoChanges("Измените оба поля")
-  //     : setNeedTwoChanges("");
-  // }, [currentUser.currentUser.email, currentUser.currentUser.name, value]);
+  useEffect(() => {
+    (value !== currentUser.currentUser.name &&
+      value === currentUser.currentUser.email) ||
+    (value === currentUser.currentUser.name &&
+      value !== currentUser.currentUser.email)
+      ? setNeedTwoChanges("Измените оба поля")
+      : setNeedTwoChanges("");
+  }, [currentUser.currentUser.email, currentUser.currentUser.name, value]);
 
   const callbackRef = useCallback((inputElement) => {
     if (inputElement) {

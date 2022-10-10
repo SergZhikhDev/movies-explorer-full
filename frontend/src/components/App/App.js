@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 
 import "./App.css";
-
+import { Form } from "../pages-components/Form/Form";
 import {Main} from "../pages-components/Main/Main";
 import Login from "../pages-components/Login/Login";
 import Movies from "../pages-components/Movies/Movies";
@@ -48,10 +48,10 @@ export const App = () => {
     setIsFetchError(false);
   }, [location]);
 
-  // useEffect(() => {
-  //   handleLoginToken();
-  //   // eslint-disable-next-line
-  // }, []);
+  useEffect(() => {
+    handleLoginToken();
+    // eslint-disable-next-line
+  }, []);
 
   const handleLoginToken = () => {
     const token = jwtLocal.load();
@@ -222,6 +222,11 @@ export const App = () => {
               handleRegister={handleRegister}
               isPreloader={isPreloader}
             />
+          </Route>
+
+          <Route path='/form'>
+            <Form/>
+
           </Route>
 
           <Route path='*'>
