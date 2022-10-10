@@ -33,7 +33,6 @@ export const Register = (props) => {
     }
     setPasswordType("password");
   };
-console.log(5)
   return (
     <main className='form register sfp_type_reg hp'>
       <div className='form__header form__header_type_auth'>
@@ -86,7 +85,6 @@ console.log(5)
                   type='email'
                   autoComplete='off'
                   placeholder='Email'
-                  required
                 />
                 <hr className='form__line line line_form line_form_type_auth'></hr>
                 <span className='form__error' id='error-userEmail'>
@@ -109,7 +107,6 @@ console.log(5)
                   type={passwordType}
                   autoComplete='off'
                   placeholder='Password'
-                  required
                 />
                 <button
                   type='button'

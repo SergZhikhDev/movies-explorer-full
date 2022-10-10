@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "./Profile.css";
 
-import {Header} from "../../nested-components/Header/Header";
+import { Header } from "../../nested-components/Header/Header";
 import { ErrorText } from "../../nested-components/ErrorText/ErrorText";
 import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
 import { useInputt } from "../../../hooks/useInput";
@@ -14,7 +14,10 @@ export const Profile = ({ handleUpdateUser, currentUser, onSignOut }) => {
   const [disableInput, setDisableInput] = useState(true);
   const name = useInputt("", config.name);
   const email = useInputt("", config.email);
-  const isValidForm = name.readyForUpdate && email.readyForUpdate;
+
+  const readyForUpdate = 
+  (name.nameReadyForUpdate || email.emailReadyForUpdate)
+  &&(name.inputValid&& email.inputValid);
 
   const handleUpdUser = (e) => {
     e.preventDefault();
@@ -27,9 +30,9 @@ export const Profile = ({ handleUpdateUser, currentUser, onSignOut }) => {
 
   function onSubmit(e) {
     e.preventDefault();
-    handleUpdateUser(name.value.field, email.value.field);
+    handleUpdateUser(name.userName, email.userEmail);
   }
-
+   
   return (
     <main
       className=' form form_type_profile sfp hp'
@@ -40,7 +43,7 @@ export const Profile = ({ handleUpdateUser, currentUser, onSignOut }) => {
         <Header />
         <div className='form__main form__main_type_profile '>
           <div className='form__main-container'>
-            <h3 className=' form__title'>{`Привет, ${currentUser.name}!`}</h3>
+            <h3 className=' form__title'>{`Привет, ${name.userName}!`}</h3>
             <fieldset className=' form__input-container form__input-container_ctrl_texts'>
               <label
                 className='
@@ -50,23 +53,23 @@ export const Profile = ({ handleUpdateUser, currentUser, onSignOut }) => {
                 {disableInput ? (
                   <input
                     className='form__item form__item_el_name'
-                    placeholder={currentUser.name}
+                    placeholder='нажми кнопку редактировать'
                     value={name.value.field || ""}
                     disabled={disableInput}
+                    onChange={name.handleProfileChange}
                   />
                 ) : (
                   <input
                     className='form__item form__item_el_name'
-                    onChange={name.handleChange}
                     value={name.value.field || ""}
-                    onClick={name.onClick}
+                    onChange={name.handleProfileChange}
+                    // onClick={name.onClick}
                     onBlur={name.onBlur}
                     name='name'
                     type='text'
                     autoComplete='off'
-                    placeholder={currentUser.name}
-                    required
-                    ref={name.callbackRef}
+                    placeholder={name.userName}
+                    // ref={name.callbackRef}
                   />
                 )}
               </label>
@@ -76,15 +79,14 @@ export const Profile = ({ handleUpdateUser, currentUser, onSignOut }) => {
                 <span className='form__text'>Email</span>
                 <input
                   className='form__item form__item_el_email'
-                  onChange={email.handleChange}
+                  onChange={email.handleProfileChange}
                   value={email.value.field || ""}
-                  onClick={email.onClick}
+                  // onClick={email.onClick}
                   onBlur={email.onBlur}
                   name='email'
                   type='email'
                   autoComplete='off'
-                  placeholder={currentUser.email}
-                  required
+                  placeholder={email.userEmail}
                   disabled={disableInput}
                 />
               </label>
@@ -93,16 +95,20 @@ export const Profile = ({ handleUpdateUser, currentUser, onSignOut }) => {
 
           <fieldset className='form__handlers '>
             <span className='form__errors'>
-              {name.isDirty && (
+              {!readyForUpdate&&(name.isDirty&&email.isDirty )&&
+              (name.inputValid&&email.inputValid)&&(
+                <ErrorText type='auth'>Измените хотя бы одно поле</ErrorText>
+              )}
+              {name.isDirty && (name.errorMessages!=='Поле  должно быть заполнено!')&&(
                 <ErrorText type='auth'>{name.errorMessages}</ErrorText>
               )}
-              {email.isDirty && (
+              {email.isDirty && (email.errorMessages!=='Поле  должно быть заполнено!')&&(
                 <ErrorText type='auth'>{email.errorMessages}</ErrorText>
               )}
 
-              {email.needTwoChanges && (
-                <ErrorText type='auth'>{email.needTwoChanges}</ErrorText>
-              )}
+              {/* {email.needTwoChanges && (
+                <ErrorText type='auth'>3{email.needTwoChanges}</ErrorText>
+              )} */}
             </span>
             <label className='form__label form__label_el_handlers'>
               <input type='submit' className='form__item invisible' />
@@ -118,7 +124,7 @@ export const Profile = ({ handleUpdateUser, currentUser, onSignOut }) => {
               ) : (
                 <button
                   type='submit'
-                  disabled={!isValidForm}
+                  disabled={!readyForUpdate}
                   className='form__button form__button_el_button form__button_type_edit form__text'
                 >
                   Сохранить

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext,useCallback } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import { useValidation } from "./useValidation";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -7,56 +7,75 @@ export const useInputt = (initialValue, validations) => {
   const currentUser = useContext(CurrentUserContext);
 
   const [isDirty, setisDirty] = useState(false);
-  const [readyForUpdate, setReadyForUpdate] = useState(false);
-  const [needTwoChanges, setNeedTwoChanges] = useState("");
+  // const [readyForUpdate, setReadyForUpdate] = useState(false);
+  // const [needTwoChanges, setNeedTwoChanges] = useState("");
 
   const valid = useValidation(value, validations);
   const { errorsKit, inputValid } = valid;
   const errorMessages = errorsKit.messages.message;
-  
+
+  const [userName, setUserName] = useState(currentUser.currentUser.name);
+  const [userEmail, setUserEmail] = useState(currentUser.currentUser.email);
+
   const handleChange = (e) => {
     //убирает имеющиеся значения
-    // e.persist();
-     e.preventDefault(e);
+    e.persist();
     setisDirty(true);
     setValue({ ...value, field: e.target.value });
-     valid.onClack(e);
+    valid.onClack(e);
   };
-  const onClick = (input) => {
-    // input.nativeEvent.target.autofocus=true
-    console.log(input.target.autofocus)
 
-    // setisDirty(false);
-   
+  const handleProfileChange = (e) => {
+    //убирает имеющиеся значения
+    e.persist();
+
+    if (e.target.name === "name") {
+      setUserName(e.target.value);
+    }
+    if (e.target.name === "email") {
+      setUserEmail(e.target.value);
+    }
+
+    setisDirty(true);
+    setValue({ ...value, field: e.target.value });
+    valid.onClack(e);
   };
+
+  // const onClick = (input) => {
+  //   // input.nativeEvent.target.autofocus=true
+  //   // setisDirty(false);
+  // };
 
   const onBlur = (e) => {
     setisDirty(true);
   };
 
+  const [nameReadyForUpdate, setNameReadyForUpdate] = useState(false);
+  const [emailReadyForUpdate, setEmailReadyForUpdate] = useState(false);
+
   useEffect(() => {
-    valid.inputValid &&
-    value !== currentUser.currentUser.name &&
-    value !== currentUser.currentUser.email
-      ? setReadyForUpdate(true)
-      : setReadyForUpdate(false);
+    valid.inputValid && currentUser.currentUser.name !== value.field
+      ? setNameReadyForUpdate(true)
+      : setNameReadyForUpdate(false);
+
+    valid.inputValid && currentUser.currentUser.email !== value.field
+      ? setEmailReadyForUpdate(true)
+      : setEmailReadyForUpdate(false);
   }, [
     currentUser.currentUser.email,
     currentUser.currentUser.name,
-    currentUser.email,
-    currentUser.name,
     valid.inputValid,
-    value,
+    value.field,
   ]);
 
-  useEffect(() => {
-    (value !== currentUser.currentUser.name &&
-      value === currentUser.currentUser.email) ||
-    (value === currentUser.currentUser.name &&
-      value !== currentUser.currentUser.email)
-      ? setNeedTwoChanges("Измените оба поля")
-      : setNeedTwoChanges("");
-  }, [currentUser.currentUser.email, currentUser.currentUser.name, value]);
+  // useEffect(() => {
+  //   (value !== currentUser.currentUser.name &&
+  //     value === currentUser.currentUser.email) ||
+  //   (value === currentUser.currentUser.name &&
+  //     value !== currentUser.currentUser.email)
+  //     ? setNeedTwoChanges("Измените оба поля")
+  //     : setNeedTwoChanges("");
+  // }, [currentUser.currentUser.email, currentUser.currentUser.name, value]);
 
   const callbackRef = useCallback((inputElement) => {
     if (inputElement) {
@@ -64,22 +83,21 @@ export const useInputt = (initialValue, validations) => {
     }
   }, []);
 
-
-
-
   return {
-    errorMessages,
-    callbackRef,
     value,
-    errorsKit,
-    inputValid,
-    readyForUpdate,
-    needTwoChanges,
-    onBlur,
-    handleChange,
-    onClick,
-    setValue,
     isDirty,
+    userName,
+    userEmail,
+    // errorsKit,
+    inputValid,
+    errorMessages,
+    nameReadyForUpdate,
+    emailReadyForUpdate,
+    onBlur,
+    callbackRef,
+    handleChange,
+    handleProfileChange,
+    setValue,
     ...valid,
   };
 };

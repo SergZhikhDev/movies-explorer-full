@@ -46,7 +46,6 @@ function Login(props) {
                 type='email'
                 autoComplete='off'
                 placeholder='Email'
-                required
               />
               <hr className='form__line line line_form line_form_type_auth'></hr>
               <span className='form__error' id='error-userEmail'>
@@ -67,7 +66,6 @@ function Login(props) {
                 type='password'
                 autoComplete='off'
                 placeholder='Password'
-                required
               />
               <hr className='form__line  line  line_form  line_form_type_auth'></hr>
               <span className='form__error ' id='error-userPassword'>
