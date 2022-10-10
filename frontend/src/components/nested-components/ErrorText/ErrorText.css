@@ -1,7 +1,7 @@
 .error-text {
     font-size: 10px;
     color: #ee3465;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .error-text_auth {
@@ -10,7 +10,6 @@
 }
 
 .error-text_auth-button {
-    margin-top: 10px;
     text-align: center;
 }
 

@@ -97,13 +97,13 @@ export const Profile = ({ handleUpdateUser, currentUser, onSignOut }) => {
             <span className='form__errors'>
               {!readyForUpdate&&(name.isDirty&&email.isDirty )&&
               (name.inputValid&&email.inputValid)&&(
-                <ErrorText type='auth'>Измените хотя бы одно поле</ErrorText>
+                <ErrorText type='auth-button'>Измените хотя бы одно поле</ErrorText>
               )}
               {name.isDirty && (name.errorMessages!=='Поле  должно быть заполнено!')&&(
-                <ErrorText type='auth'>{name.errorMessages}</ErrorText>
+                <ErrorText type='auth-button'>{name.errorMessages}</ErrorText>
               )}
               {email.isDirty && (email.errorMessages!=='Поле  должно быть заполнено!')&&(
-                <ErrorText type='auth'>{email.errorMessages}</ErrorText>
+                <ErrorText type='auth-button'>{email.errorMessages}</ErrorText>
               )}
 
               {/* {email.needTwoChanges && (

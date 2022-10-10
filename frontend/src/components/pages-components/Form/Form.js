@@ -3,6 +3,7 @@ import "./Form.css";
 import { useInputt } from "../../../hooks/useInput";
 import { config } from "../../../utils/constants";
 import { ErrorText } from "../../nested-components/ErrorText/ErrorText";
+import { Link } from "react-router-dom";
 
 export const Form = () => {
   console.log(777);
@@ -47,6 +48,13 @@ export const Form = () => {
                     <ErrorText type='auth'>{field.errorMessages}</ErrorText>
                   )}
                 </span>
+                <div className='form__footer form__footer_type_auth'>
+            <p className='form__question'> Уже зарегистрированы? </p>
+            <Link className='form__login-link' to='signin'>
+              {" "}
+              Войти{" "}
+            </Link>
+          </div>
     </form>
   );
 };

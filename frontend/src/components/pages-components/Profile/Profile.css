@@ -74,7 +74,7 @@
 }
 
 .form__item:focus {
-  text-align: center;
+  text-align: start;
 }
 
 .form__label {
@@ -93,6 +93,7 @@
   font: normal 500 11px/1.18 Inter, Arial, sans-serif;
   /* min-width: 141px; */
   text-align: left;
+  margin-right: 15px;
 }
 
 .line_form {
