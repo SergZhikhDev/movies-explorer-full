@@ -13,6 +13,8 @@ const allowedCors = [
   // 'http://localhost:3001/',
   // 'http://localhost:3001/signup',
   // 'https://localhost:3001/signup',
+  'https://sergzhikhdev.github.io/movies-explorer-frontend/',
+  'https://sergzhikhdev.github.io',
   'http://front-szh-dpl.students.nomorepartiesxyz.ru',
   'https://front-szh-dpl.students.nomorepartiesxyz.ru',
   'http://localhost:3000',
