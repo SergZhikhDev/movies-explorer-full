@@ -96,7 +96,7 @@ export const Profile = ({ handleUpdateUser, currentUser, onSignOut }) => {
           <fieldset className='form__handlers '>
             <span className='form__errors'>
               {!readyForUpdate&&(name.isDirty&&email.isDirty )&&
-              (name.inputValid&&email.inputValid)&&(
+              (!name.inputValid&&!email.inputValid)&&(
                 <ErrorText type='auth-button'>Измените хотя бы одно поле</ErrorText>
               )}
               {name.isDirty && (name.errorMessages!=='Поле  должно быть заполнено!')&&(
