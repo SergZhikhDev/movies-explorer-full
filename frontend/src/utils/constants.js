@@ -1,13 +1,13 @@
 const regex = {
   name: /^[A-Za-zА-Яа-яЁё /s -]+$/,
   email: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
-  password:
-    /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]/,
+  password: /^.$/,
+    // /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]/,
 };
 const config = {
-  name: { isEmpty: true, minLength: 2, maxLength: 16, isName: true },
+  name: { isEmpty: true, minLength: 2, maxLength: 30, isName: true },
   email: { isEmpty: true, isEmail: true },
-  password: { isEmpty: true, minLength: 6, maxLength: 20, isPass: true },
+  password: { isEmpty: true, minLength: 3, maxLength: 10/*, isPass: true*/ },
   etc:{isEmpty: true},
 };
 const reports = {
