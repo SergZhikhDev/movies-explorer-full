@@ -17,11 +17,12 @@ export const Form = () => {
   const field = useInputt({}, config.name);
 
   return (
-    <main className='form register sfp_type_reg hp'>
-    <div className='form__header form__header_type_auth'>
+ 
+   
+    <form onSubmit={handleSubmit}>
+       <div className='form__header form__header_type_auth'>
     <Logo />
   </div>
-    <form onSubmit={handleSubmit}>
       <input
         type='text'
         name='field'
@@ -45,6 +46,6 @@ export const Form = () => {
         </Link>
       </div>
     </form>
-    </main>
+
   );
 };
