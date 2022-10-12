@@ -1,27 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "./SearchForm.css";
 
-import { ErrorText } from "../ErrorText/ErrorText";
-import { FilterCheckbox } from "../FilterCheckbox/FilterCheckbox";
-import { useInputt } from "../../../hooks/useInput";
 import { config } from "../../../utils/constants";
+import { ErrorText } from "../ErrorText/ErrorText";
+import { useInputt } from "../../../hooks/useInput";
+import { FilterCheckbox } from "../FilterCheckbox/FilterCheckbox";
 
-export const SearchForm = ({ searchFilms, searchQueryLocal }) => {
-  const film = useInputt({ field: "", short: false }, config.etc);
+export const SearchForm = ({ searchFilms, searchQueryLocal, path,isLoading }) => {
+  const film = useInputt(searchQueryLocal.load(), config.etc);
 
-  function onChangeCheckbox(e) {
-    const newValues = { ...film.value, short: e.target.checked };
-    searchFilms(newValues);
-    searchQueryLocal.save(newValues);
-  }
+  const [disabledButton, setDisabledButton] = useState(true);
+  useEffect(() => {
+    film.inputValid ? setDisabledButton(false) : setDisabledButton(true);
+  }, [film.inputValid]);
 
-  function handleSubmitForm(evt) {
-    evt.preventDefault();
-    const newValues = { ...film.value, short: evt.target.checked };
-    searchQueryLocal.save(newValues);
+  function handleSubmitForm(e) {
+    e.preventDefault();
+    setDisabledButton(true);
+    setTimeout(() => {
+      setDisabledButton(false);
+    }, 2000);
+     if (path === "/movies") {
+      searchQueryLocal.save(film.value);
+    }
 
-    searchFilms(newValues);
+    searchFilms(film.value);
   }
 
   return (
@@ -33,12 +37,12 @@ export const SearchForm = ({ searchFilms, searchQueryLocal }) => {
               type='text'
               className='search__movie'
               autoComplete='off'
-              name='film'
+              name='field'
               placeholder='Фильм'
               required
               id='search-movie'
               value={film.value.field || ""}
-              onChange={film.handleChange}
+              onChange={film.handleCheckBoxChange}
               onBlur={film.onBlur}
               ref={film.callbackRef}
             />
@@ -47,7 +51,7 @@ export const SearchForm = ({ searchFilms, searchQueryLocal }) => {
             <button
               type='submit'
               className='search__button '
-              disabled={!localStorage.films && !film.inputValid}
+              disabled={disabledButton}
             ></button>
           </fieldset>
         </div>
@@ -59,8 +63,10 @@ export const SearchForm = ({ searchFilms, searchQueryLocal }) => {
         </div>
 
         <FilterCheckbox
-          onChangeCheckbox={onChangeCheckbox}
-          inputValid={film.inputValid}
+          film={film}
+          path={path}
+          searchFilms={searchFilms}
+          searchQueryLocal={searchQueryLocal}
         />
       </form>
     </section>

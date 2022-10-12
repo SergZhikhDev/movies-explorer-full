@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 import "./SavedMovies.css";
-import {Header} from "../../nested-components/Header/Header";
+import { Header } from "../../nested-components/Header/Header";
 import Footer from "../../nested-components/Footer/Footer";
 import { SearchForm } from "../../nested-components/SearchForm/SearchForm";
 import { MoviesCardList } from "../../nested-components/MoviesCardList/MoviesCardList";
@@ -13,8 +13,9 @@ import { reports, short_movie } from "../../../utils/constants";
 export const SavedMovies = ({
   requestLikeFilms,
   handleClickLikeButton,
-  setIsShowMenu,
+  filmsLocal,
   searchQuerySavedMoviesLocal,
+  path,
 }) => {
   const [likedFilms, setLikedFilms] = useState(null);
   const [displayedFilms, setDisplayedFilms] = useState(null);
@@ -40,6 +41,7 @@ export const SavedMovies = ({
         stopLoader();
       });
   }
+
   function searchFilms(values) {
     const films = filterFilms(likedFilms, short_movie, values);
     setDisplayedFilms(films);
@@ -75,11 +77,14 @@ export const SavedMovies = ({
   function hideErrorMessage() {
     setErrorMessage(null);
   }
+
   return (
     <>
       <Header />
       <main className='saved-movies sp hp'>
         <SearchForm
+          path={path}
+          isLoading={isLoading}
           searchFilms={searchFilms}
           searchQueryLocal={searchQuerySavedMoviesLocal}
         />

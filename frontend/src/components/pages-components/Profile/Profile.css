@@ -36,6 +36,7 @@
 
 .form__main {
   margin: 74px auto 70px;
+  max-width: 410px;
 }
 
 .form__footer {
@@ -73,9 +74,9 @@
   width: 100%;
 }
 
-.form__item:focus {
+/* .form__item:focus {
   text-align: start;
-}
+} */
 
 .form__label {
   display: flex;

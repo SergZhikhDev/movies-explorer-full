@@ -13,6 +13,7 @@ export const useInputt = (initialValue, validations) => {
   const valid = useValidation(value, validations);
   const { errorsKit, inputValid } = valid;
   const errorMessages = errorsKit.messages.message;
+  const emptyMessage = valid.errorsKit.errors.emptyError;
 
   const [userName, setUserName] = useState(currentUser.currentUser.name);
   const [userEmail, setUserEmail] = useState(currentUser.currentUser.email);
@@ -41,6 +42,13 @@ export const useInputt = (initialValue, validations) => {
     valid.onClack(e);
   };
 
+  const handleCheckBoxChange = (e) => {
+    const isCheckbox = e.target.type === "checkbox";
+    const name = e.target.name;
+    const val = isCheckbox ? e.target.checked : e.target.value;
+    setValue({ ...value, [name]: val });
+  };
+
   // const onClick = (input) => {
   //   // input.nativeEvent.target.autofocus=true
   //   // setisDirty(false);
@@ -54,17 +62,18 @@ export const useInputt = (initialValue, validations) => {
   const [emailReadyForUpdate, setEmailReadyForUpdate] = useState(false);
 
   useEffect(() => {
-    valid.inputValid && currentUser.currentUser.name !== value.field
+    currentUser.currentUser.name !== (userName || value.field)
       ? setNameReadyForUpdate(true)
       : setNameReadyForUpdate(false);
 
-    valid.inputValid && currentUser.currentUser.email !== value.field
+    currentUser.currentUser.email !== (userEmail || value.field)
       ? setEmailReadyForUpdate(true)
       : setEmailReadyForUpdate(false);
   }, [
     currentUser.currentUser.email,
     currentUser.currentUser.name,
-    valid.inputValid,
+    userEmail,
+    userName,
     value.field,
   ]);
 
@@ -88,16 +97,17 @@ export const useInputt = (initialValue, validations) => {
     isDirty,
     userName,
     userEmail,
-    // errorsKit,
+    emptyMessage,
     inputValid,
     errorMessages,
     nameReadyForUpdate,
     emailReadyForUpdate,
     onBlur,
+    setValue,
     callbackRef,
     handleChange,
     handleProfileChange,
-    setValue,
+    handleCheckBoxChange,
     ...valid,
   };
 };

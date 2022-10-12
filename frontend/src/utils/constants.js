@@ -49,7 +49,7 @@ const count = {
 };
 
 const breackpoint = {
-  two: 1000,
+  two: 1280,
   one: 700,
 };
 

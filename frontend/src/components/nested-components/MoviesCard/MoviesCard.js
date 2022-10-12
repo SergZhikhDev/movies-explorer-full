@@ -11,6 +11,13 @@ export const MoviesCard = ({ film, handleClickLikeButton }) => {
   const isSavedMovies = useHistory().location.pathname === "/saved-movies";
 
   let imageUrl;
+  let trailerLink;
+  const regexLink =
+    /^http(s|)(:|)\/\/(www.|)((\w+|\d+)(-|\.))+[a-z]{2,3}(\S+|)(#| +|)$/i;
+
+  !regexLink.test(String(film.trailerLink).toLowerCase())
+    ? (trailerLink = "https://www.youtube.com/watch?v=5oX5R_IFvTs&t=9s")
+    : (trailerLink = film.trailerLink);
 
   !film.image.url
     ? (imageUrl = `${film.image}`)
@@ -27,13 +34,13 @@ export const MoviesCard = ({ film, handleClickLikeButton }) => {
     } else {
       const filmData = {
         country: film.country || "-",
-        director: film.director,
+        director: film.director|| "-",
         duration: film.duration,
-        year: film.year,
-        description: film.description,
+        year: film.year|| "-",
+        description: film.description|| "-",
         image: base_url + film.image.url,
-        trailerLink: film.trailerLink,
-        nameRU: film.nameRU,
+        trailerLink: film.trailerLink || trailerLink,
+        nameRU: film.nameRU|| "-",
         nameEN: film.nameEN || "-",
         thumbnail: base_url + film.image.formats.thumbnail.url,
         movieId: film.id,
@@ -44,6 +51,9 @@ export const MoviesCard = ({ film, handleClickLikeButton }) => {
       });
     }
   }
+
+  useEffect(() => {}, []);
+
   return (
     <li className='card-movie'>
       <div className='card-movie__description'>
@@ -60,7 +70,7 @@ export const MoviesCard = ({ film, handleClickLikeButton }) => {
         ></button>
       </div>
       <a
-        href={film.trailerLink}
+        href={trailerLink}
         target='_blank'
         rel='noreferrer'
         className='card-movie__link'

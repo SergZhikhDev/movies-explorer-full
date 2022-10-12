@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Route, Switch, useHistory, useLocation } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  Redirect,
+  useHistory,
+  useLocation,
+} from "react-router-dom";
 
 import "./App.css";
 import { Form } from "../pages-components/Form/Form";
-import {Main} from "../pages-components/Main/Main";
+import { Main } from "../pages-components/Main/Main";
 import Login from "../pages-components/Login/Login";
 import Movies from "../pages-components/Movies/Movies";
 import NotFound from "../pages-components/NotFound/NotFound";
@@ -19,7 +25,7 @@ import { mainApi } from "../../utils/MainApi";
 import { reports } from "../../utils/constants";
 import { moviesApi } from "../../utils/MoviesApi";
 import LocalStorage from "../../utils/LocalStorage";
- 
+
 export const App = () => {
   const [token, setToken] = useState("");
   const [currentUser, setCurrentUser] = useState({});
@@ -32,13 +38,13 @@ export const App = () => {
   const history = useHistory();
   const location = useLocation();
   const jwtLocal = new LocalStorage("jwt");
-  const filmsLocal = new LocalStorage("films");
+  const filmsLocal = new LocalStorage("allFilms");
+  const filtredFilmsLocal = new LocalStorage("filtredFilms");
   const searchQuerySavedMoviesLocal = new LocalStorage(
-    "search-query-saved-movies",
+    "searchQuerySavedMovies",
     { field: "", short: false }
   );
-  const searchQueryMoviesLocal = new LocalStorage(
-    "search-query-movies", {
+  const searchQueryMoviesLocal = new LocalStorage("searchQueryMovies", {
     field: "",
     short: false,
   });
@@ -100,7 +106,6 @@ export const App = () => {
   }
 
   function getUserInfo(token) {
-         
     mainApi
       .getUserInfo(token)
       .then((user) => {
@@ -122,8 +127,10 @@ export const App = () => {
       .updateUserInfo({ name, email }, token)
       .then((res) => {
         setCurrentUser(res.data);
-        history.push("/");
         showAttention(reports.attentionMessages.done.upd_profile);
+        setTimeout(() => {
+          history.push("/");
+        }, 2000);
       })
       .catch(() => {
         showAttention(reports.attentionMessages.error.upd_profile);
@@ -134,6 +141,7 @@ export const App = () => {
   function clearLocal() {
     jwtLocal.delete();
     filmsLocal.delete();
+    filtredFilmsLocal.delete();
     searchQueryMoviesLocal.delete();
     searchQuerySavedMoviesLocal.delete();
   }
@@ -149,6 +157,25 @@ export const App = () => {
 
   // Изменение флажка у фильма
   function handleClickLikeButton(filmId, film) {
+    const regexLink =
+      /^http(s|)(:|)\/\/(www.|)((\w+|\d+)(-|\.))+[a-z]{2,3}(\S+|)(#| +|)$/i;
+
+    if (!regexLink.test(String(film.trailerLink).toLowerCase())) {
+      film.trailerLink = "https://www.youtube.com/watch?v=5oX5R_IFvTs&t=9s";
+    };
+    if (!film.nameRU) {
+      film.nameRU = "Кино";
+    };
+    if (!film.description) {
+      film.description = "Вам понравиться";
+    };
+    if (!film.country) {
+      film.country = "Индия(наверное)";
+    };
+    if (!film.year) {
+      film.year = "20-21век";
+    };
+
     return filmId
       ? mainApi.deleteLikeFilm(filmId, token).catch(() => {
           showAttention(Attention - reports.error.delete_movie);
@@ -170,7 +197,7 @@ export const App = () => {
     setIsActiveAttention(true);
     setTimeout(() => {
       setIsActiveAttention(false);
-    }, 3000);
+    }, 2000);
   }
   return (
     <div className='App page'>
@@ -189,6 +216,7 @@ export const App = () => {
             requestLikeFilms={requestLikeFilms}
             isPreloader={isPreloader}
             filmsLocal={filmsLocal}
+            filtredFilmsLocal={filtredFilmsLocal}
             searchQueryMoviesLocal={searchQueryMoviesLocal}
           />
 
@@ -199,6 +227,8 @@ export const App = () => {
             handleClickLikeButton={handleClickLikeButton}
             requestLikeFilms={requestLikeFilms}
             isPreloader={isPreloader}
+            filmsLocal={filmsLocal}
+            filtredFilmsLocal={filtredFilmsLocal}
             searchQuerySavedMoviesLocal={searchQuerySavedMoviesLocal}
           ></ProtectedRoute>
 
@@ -213,10 +243,12 @@ export const App = () => {
           />
 
           <Route path='/signin'>
+            {!isLoggedIn ? "" : <Redirect to='/' />}
             <Login handleLogin={handleLogin} isPreloader={isPreloader} />
           </Route>
 
           <Route path='/signup'>
+            {!isLoggedIn ? "" : <Redirect to='/' />}
             <Register
               handleRegister={handleRegister}
               isPreloader={isPreloader}
@@ -224,8 +256,10 @@ export const App = () => {
           </Route>
 
           <Route path='/form'>
-            <Form/>
-
+            <Form 
+                handleRegister={handleRegister}
+                isPreloader={isPreloader}
+            />
           </Route>
 
           <Route path='*'>
