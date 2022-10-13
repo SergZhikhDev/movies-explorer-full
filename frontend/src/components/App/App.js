@@ -157,25 +157,7 @@ export const App = () => {
 
   // Изменение флажка у фильма
   function handleClickLikeButton(filmId, film) {
-    const regexLink =
-      /^http(s|)(:|)\/\/(www.|)((\w+|\d+)(-|\.))+[a-z]{2,3}(\S+|)(#| +|)$/i;
-
-    if (!regexLink.test(String(film.trailerLink).toLowerCase())) {
-      film.trailerLink = "https://www.youtube.com/watch?v=5oX5R_IFvTs&t=9s";
-    };
-    if (!film.nameRU) {
-      film.nameRU = "Кино";
-    };
-    if (!film.description) {
-      film.description = "Вам понравиться";
-    };
-    if (!film.country) {
-      film.country = "Индия(наверное)";
-    };
-    if (!film.year) {
-      film.year = "20-21век";
-    };
-
+   
     return filmId
       ? mainApi.deleteLikeFilm(filmId, token).catch(() => {
           showAttention(Attention - reports.error.delete_movie);
@@ -255,12 +237,12 @@ export const App = () => {
             />
           </Route>
 
-          {/* <Route path='/form'>
+          <Route path='/form'>
             <Form 
                 handleRegister={handleRegister}
                 isPreloader={isPreloader}
             />
-          </Route> */}
+          </Route>
 
           <Route path='*'>
             <NotFound />

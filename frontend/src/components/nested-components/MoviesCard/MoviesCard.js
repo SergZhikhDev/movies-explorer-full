@@ -39,7 +39,7 @@ export const MoviesCard = ({ film, handleClickLikeButton }) => {
         year: film.year|| "-",
         description: film.description|| "-",
         image: base_url + film.image.url,
-        trailerLink: film.trailerLink || trailerLink,
+        trailerLink:  trailerLink,
         nameRU: film.nameRU|| "-",
         nameEN: film.nameEN || "-",
         thumbnail: base_url + film.image.formats.thumbnail.url,

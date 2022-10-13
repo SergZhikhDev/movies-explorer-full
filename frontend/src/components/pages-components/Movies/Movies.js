@@ -71,14 +71,14 @@ function Movies({
   }, [allFilms, queryValues]);
 
   // Отобразить фильмы
-  useEffect(() => {
- 
+  useEffect((values) => {
+    searchFilms(values)
     if (filtredFilms?.length) {
       const films = setLike(filtredFilms, likedFilms);
       setDisplayedFilms(films);
     }
     // eslint-disable-next-line
-  }, [filtredFilms, startCountFilms]);
+  }, [filtredFilms, startCountFilms,path]);
 
   function getLikeFilms() {
     startLoader();
