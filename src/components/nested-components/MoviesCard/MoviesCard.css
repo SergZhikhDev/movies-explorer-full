@@ -1,0 +1,105 @@
+.card-movie {
+  width: 364px;
+  height: 271px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background-color: #222;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+}
+
+.card-movie__description {
+  padding: 14px;
+  display: flex;
+  justify-content: flex-start;
+  height: 68px;
+  align-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+
+
+.card-movie__overlay {
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  position: absolute;
+  background-image: url("../../../images/play.svg");
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100px;
+}
+
+.card-movie__overlay:hover {
+  opacity: 1;
+}
+.card-movie__title {
+  margin-bottom: 9px;
+  width: 280px;
+   font: normal 500 15px/1.2 Inter, Arial, sans-serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card-movie__duration {
+  font: normal 400 11px/1.18 Inter, Arial, sans-serif;
+
+  
+  display: flex;
+}
+
+.card-movie__link{
+  position: relative;
+}
+.card-movie__image{
+  height: 203px;
+}
+
+.card-movie__flag{
+  width: 30px;
+  height: 30px;
+  border: none;
+  position: absolute;
+  top: 19px;
+  right: 14px;
+  background-color: transparent;
+    background-image: url(../../../images/flag-grey.svg);
+  cursor: pointer;
+}
+
+.card-movie__flag_active {
+background-image: url(../../../images/flag-green.svg);
+}
+
+.card-movie__flag:hover {
+  opacity: 0.6;
+  transition: opacity 0.3s linear;
+}
+
+.saved-movies .card-movie__close-cross {
+  width: 30px;
+  height: 30px;
+  border: none;
+  position: absolute;
+  top: 19px;
+  right: 14px;
+  background-color: transparent;
+  background-image: url(../../../images/close-cross.svg);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 769px) {}
+
+@media screen and (max-width: 601px) {}
+
+@media screen and (max-width: 481px) {}
+
+@media screen and (max-width: 321px) {}

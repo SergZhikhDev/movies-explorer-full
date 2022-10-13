@@ -1,0 +1,150 @@
+.graph {
+  display: flex;
+  margin: 110px 0
+}
+
+.graph__column {
+  font: normal 400 14px/1.21 Inter, Arial, sans-serif;
+  text-align: center
+}
+
+.graph__column_back-end {
+  width: 20%
+}
+
+.graph__column_front-end {
+  width: 80%
+}
+
+.graph__description {
+  color: #8b8b8b
+}
+
+.graph__time {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+  min-height: 36px
+}
+
+.graph__time_back {
+  background-color: #3ddc84;
+  color: #000
+}
+
+.graph__time_front {
+  background-color: #303030
+}
+
+.line {
+  border-top: 1px solid #dadada
+}
+
+.project-description {
+  background-color: #000;
+  display: flex;
+  flex-direction: column
+}
+
+.section-title {
+  font: normal 400 22px/1.23 Inter, Arial, sans-serif;
+  letter-spacing: -.04em;
+  margin: 110px 0 23px
+}
+
+.table {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 70px
+}
+
+.table__column {
+  width: 48%
+}
+
+.table__description {
+  font: normal 400 14px/1.43 Inter, Arial, sans-serif;
+  width: 80%
+}
+
+.table__subtitle {
+  font: normal 400 20px/1.2 Inter, Arial, sans-serif;
+  letter-spacing: -.04em;
+  margin-bottom: 26px
+}
+
+@media screen and (max-width: 769px) {
+  .graph {
+    margin-bottom: 90px;
+    margin-top: 93px
+  }
+
+  .table__description {
+    font-size: 12px;
+    line-height: 1.5
+  }
+
+  .table__subtitle {
+    margin-bottom: 22px
+  }
+
+  .section-title_about-project {
+    margin-top: 90px
+  }
+}
+
+@media screen and (max-width: 481px) {
+  .project-description {
+    background-color: #202020
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .graph {
+    font: normal 400 11px/1.8 Inter, Arial, sans-serif;
+    height: 35px;
+    margin-bottom: 70px;
+    margin-top: 60px
+  }
+
+  .graph__column_back-end {
+    width: 100px
+  }
+
+  .graph__column_front-end {
+    width: 184px
+  }
+
+  .project-description {
+    font: normal 400 18px/1.22 Inter, Arial, sans-serif
+  }
+
+  .table {
+    flex-direction: column;
+    margin-top: 60px
+  }
+
+  .table__column {
+    width: 100%
+  }
+
+  .table__column-stages {
+    margin-bottom: 56px
+  }
+
+  .table__description {
+    font: normal 400 11px/1.45 Inter, Arial, sans-serif;
+    width: 100%
+  }
+
+  .table__subtitle {
+    font: normal 400 18px/1.22 Inter, Arial, sans-serif;
+    margin-bottom: 16px
+  }
+
+  .section-title_about-project {
+    margin-bottom: 28px;
+    margin-top: 70px
+  }
+}

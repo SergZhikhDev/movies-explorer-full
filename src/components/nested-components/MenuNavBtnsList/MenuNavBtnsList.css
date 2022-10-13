@@ -1,0 +1,8 @@
+.btns-block__link_active {
+    border-bottom-style: solid;
+}
+
+.btns-block__link:first-child {
+    display: none;
+
+}

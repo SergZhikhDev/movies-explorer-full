@@ -1,0 +1,24 @@
+.movies {
+  /* margin-top: 74px; */
+  background-color: #202020;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.more {
+  margin: 50px auto 80px;
+  width: 320px;
+  height: 36px;
+  /* */
+  background-color: transparent;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid #424242;
+  opacity: 0.42;
+}
+
+#more__toggle {
+  opacity: 0
+}
+

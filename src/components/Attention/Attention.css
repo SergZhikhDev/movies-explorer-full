@@ -1,0 +1,28 @@
+.attention__container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 25%;
+  left: 0;
+  background-color: #fff0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.attention__container_hidden {
+  display: none;
+}
+
+.attention {
+  background-color: #0b2bfb;
+  border-radius: 20px;
+  padding: 150px 80px;
+  transition: all 0.5s ease-in;
+  opacity: 1;
+  max-width: 450px;
+}
+
+.attention__text {
+  color: #fff;
+}

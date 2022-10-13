@@ -1,0 +1,38 @@
+.auth {
+  /* display: none; */
+}
+
+.btns-block__list {
+
+
+  display: flex;
+  align-items: center;
+}
+
+.btns-block__link {
+  margin-right: 20px;
+}
+
+.btns-block__link_login-btn {
+  margin: 0 0 0 30px;
+  padding: 8px 0;
+  background-color: #3ddc84;
+  min-width: 76px;
+  text-align: center;
+  border-radius: 3px;
+  color: #000;
+}
+
+.btns-block__link_signup-btn:first-child {
+  display: block;
+}
+
+/* данный медиазапрос реализован на время,
+ пока не подключен js, для демонстрации наличия
+ всех вариантов навигации */
+/* @media screen and (max-width: 769px) {
+  .auth {
+    display: none;
+
+  }
+} */

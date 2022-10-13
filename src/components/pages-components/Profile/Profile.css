@@ -1,0 +1,145 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.form__header {
+  display: flex;
+  width: 100%;
+}
+
+.form__admin {
+  width: 100%;
+}
+
+.form__button {
+  font: normal 400 13px/1.23 Inter, Arial, sans-serif;
+}
+
+.form__button_out {
+  color: #ee3465;
+  text-align: center;
+}
+
+.form__button_type_edit {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.form__errors {
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+.form__main {
+  margin: 74px auto 70px;
+  max-width: 410px;
+}
+
+.form__footer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+}
+
+.form__handlers {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font: normal 400 13px/1.23 Inter, Arial, sans-serif;
+  margin-top: 100px;
+}
+
+.form__title {
+  color: #fff;
+  font: normal 500 24px/1.21 Inter, Arial, sans-serif;
+  text-align: center;
+}
+
+.form__input-container {
+  border: none;
+  margin-top: 123px;
+}
+
+.form__item {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font: normal 400 11px/1.18 Inter, Arial, sans-serif;
+  outline: none;
+  text-align: right;
+  width: 100%;
+}
+
+/* .form__item:focus {
+  text-align: start;
+} */
+
+.form__label {
+  display: flex;
+  font: normal 400 11px/1.18 Inter, Arial, sans-serif;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.form__label_el_handler {
+  flex-direction: column;
+  width: 100%;
+}
+
+.form__text {
+  font: normal 500 11px/1.18 Inter, Arial, sans-serif;
+  /* min-width: 141px; */
+  text-align: left;
+  margin-right: 15px;
+}
+
+.line_form {
+  border-color: #424242;
+  margin: 16px 0 17px;
+  width: 100%;
+}
+
+/* @media screen and (max-width: 550px) {
+  .form__main {
+
+  }
+} */
+
+@media screen and (max-height: 769px) {
+  .form__main {
+    margin-bottom: 30px;
+  }
+
+  .form__admin {
+    margin-top: 50px;
+  }
+}
+
+@media screen and (max-height: 550px) {
+  .form__main {
+    margin-bottom: 15px;
+  }
+
+  .form__input-container {
+    margin-top: 70px;
+  }
+  .form__admin {
+    margin-top: 20px;
+  }
+  .form__handlers {
+    margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 601px) {
+}
+
+@media screen and (max-width: 481px) {
+}
+
+@media screen and (max-width: 321px) {
+}
