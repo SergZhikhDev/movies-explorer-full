@@ -75,7 +75,7 @@ function Movies({
     searchFilms(values)
     if (filtredFilms?.length) {
       const films = setLike(filtredFilms, likedFilms);
-      setDisplayedFilms(films);
+      setDisplayedFilms([...films.slice(0, startCountFilms)]);
     }
     // eslint-disable-next-line
   }, [filtredFilms, startCountFilms,path]);
