@@ -59,6 +59,7 @@ function Movies({
   useEffect(() => {
     if (allFilms?.length && queryValues) {
       const films = filterFilms(allFilms, short_movie, queryValues);
+
       saveFiltredFilmsLocal(films);
       setFiltredFilms(films);
 
@@ -71,9 +72,10 @@ function Movies({
 
   // Отобразить фильмы
   useEffect(() => {
+ 
     if (filtredFilms?.length) {
       const films = setLike(filtredFilms, likedFilms);
-      setDisplayedFilms([...films.slice(0, startCountFilms)]);
+      setDisplayedFilms(films);
     }
     // eslint-disable-next-line
   }, [filtredFilms, startCountFilms]);
@@ -83,7 +85,7 @@ function Movies({
     requestLikeFilms()
       .then((films) => {
         setLikedFilms(formatLikedFilms(films));
-        setAllFilms(films);
+        // setAllFilms(films);
         hideErrorMessage();
       })
       .catch(() => {
@@ -150,9 +152,15 @@ function Movies({
   }
 
   function loadFilmsLocal() {
-    const localFilms = filmsLocal.load();
-    setFiltredFilms(localFilms);
+    // const localFilms = filmsLocal.load();
+    setAllFilms(filmsLocal.load());
   }
+
+
+  // function saveFiltredFilmsLocal() {
+  //   // const filtrFilmsLocal = filtredFilmsLocal.load();
+  //   setAllFilms(filtredFilmsLocal.load());
+  // }
 
   function addResizeEvent() {
     window.addEventListener("resize", setParamsCountFilms);

@@ -255,12 +255,12 @@ export const App = () => {
             />
           </Route>
 
-          <Route path='/form'>
+          {/* <Route path='/form'>
             <Form 
                 handleRegister={handleRegister}
                 isPreloader={isPreloader}
             />
-          </Route>
+          </Route> */}
 
           <Route path='*'>
             <NotFound />
