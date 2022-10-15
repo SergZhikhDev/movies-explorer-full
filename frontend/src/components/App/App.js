@@ -96,6 +96,7 @@ export const App = () => {
   const handleLogin = (email, password) => {
     setIsFetchError(false);
     setIsLoading(true);
+
     mainApi
       .signin({ email, password })
       .then((res) => {
@@ -117,6 +118,7 @@ export const App = () => {
   };
 
   function requestAllFilms() {
+    setIsLoading(true);
     return moviesApi.getMovies().finally(() => {
       setIsLoading(false);
       setIsPreloader(false);
@@ -191,6 +193,7 @@ export const App = () => {
 
   // Запросить отмеченные фильмы
   function requestLikeFilms() {
+    setIsLoading(true);
     return mainApi
       .fetchLikeFilms(token)
       .then((films) => {
@@ -199,7 +202,9 @@ export const App = () => {
       .catch(() => {
         showAttention(reports.apiMessages.error);
       })
-      .finally(() => {});
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   function requestLikeSavedFilms() {
