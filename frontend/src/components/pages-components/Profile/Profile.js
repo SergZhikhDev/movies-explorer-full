@@ -9,9 +9,17 @@ import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
 import { useInputt } from "../../../hooks/useInput";
 import { config } from "../../../utils/constants";
 
-export const Profile = ({ handleUpdateUser, onSignOut }) => {
+export const Profile = ({
+  handleUpdateUser,
+  onSignOut,
+  isLoading,
+  ctrlToken,
+}) => {
   const { isFetchError } = useContext(CurrentUserContext);
   const [disableInput, setDisableInput] = useState(true);
+  const [message, setMessage] = useState(
+    " Данные не изменились, измените хотя бы одно поле."
+  );
   const name = useInputt("", config.name);
   const email = useInputt("", config.email);
   const readyNmError =
@@ -28,6 +36,7 @@ export const Profile = ({ handleUpdateUser, onSignOut }) => {
   const handleUpdUser = (e) => {
     e.preventDefault();
     setDisableInput(false);
+    ctrlToken();
   };
 
   function signOut() {
@@ -36,6 +45,8 @@ export const Profile = ({ handleUpdateUser, onSignOut }) => {
 
   function onSubmit(e) {
     e.preventDefault();
+    setMessage(null);
+
     handleUpdateUser(name.userName, email.userEmail);
   }
 
@@ -108,24 +119,20 @@ export const Profile = ({ handleUpdateUser, onSignOut }) => {
 
           <fieldset className='form__handlers '>
             <span className='form__errors'>
-              {!readyForUpdate && (
-               ( name.isDirty||
-                email.isDirty )&&
-               (name.inputValid ||
-                email.inputValid )&&
-            
-                <ErrorText type='auth-button'>
-                 Данные не изменились, измените хотя бы одно поле.
-                </ErrorText>
+              {!readyForUpdate &&
+                (name.isDirty || email.isDirty) &&
+                (name.inputValid || email.inputValid) && (
+                  <ErrorText type='auth-button'>{message}</ErrorText>
+                )}
+              {name.errorMessages !== "Поле  должно быть заполнено!" && (
+                <ErrorText type='auth-button'>{name.errorMessages}</ErrorText>
               )}
-              {
-                name.errorMessages !== "Поле  должно быть заполнено!" &&(
-                <ErrorText type='auth-button'>{name.errorMessages}</ErrorText>)
-              }
-              {email.isDirty && (
-                email.errorMessages !== "Поле  должно быть заполнено!"&&(
-                <ErrorText type='auth-button'>{email.errorMessages}</ErrorText>)
-              )}
+              {email.isDirty &&
+                email.errorMessages !== "Поле  должно быть заполнено!" && (
+                  <ErrorText type='auth-button'>
+                    {email.errorMessages}
+                  </ErrorText>
+                )}
 
               {/* {email.needTwoChanges && (
                 <ErrorText type='auth'>3{email.needTwoChanges}</ErrorText>
@@ -145,7 +152,7 @@ export const Profile = ({ handleUpdateUser, onSignOut }) => {
               ) : (
                 <button
                   type='submit'
-                  disabled={!readyForUpdate}
+                  disabled={!readyForUpdate || isLoading}
                   className='form__button form__button_el_button form__button_type_edit form__text'
                 >
                   Сохранить

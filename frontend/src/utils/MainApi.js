@@ -1,7 +1,8 @@
 class Api {
-  constructor({ baseUrl, headers }) {
+  constructor({ baseUrl, headers, error }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
+    this._error = error;
   }
 
   async _fetch(path, method, body, token) {
@@ -14,7 +15,9 @@ class Api {
       },
       body,
     });
-    return await (res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
+    return await (res.ok
+      ? res.json()
+      : Promise.reject(`Ошибка: ${res.status}`));
   }
 
   signup(user) {
@@ -52,7 +55,7 @@ class Api {
 
 export const mainApi = new Api({
   // baseUrl: "http://localhost:3002",
-  baseUrl:    "  http://front-szh-dpl.students.nomorepartiesxyz.ru",
+  baseUrl: "  http://front-szh-dpl.students.nomorepartiesxyz.ru",
   headers: {
     "Content-Type": "application/json",
   },

@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 
 import "./App.css";
-import { Form } from "../pages-components/Form/Form";
 import { Main } from "../pages-components/Main/Main";
 import Login from "../pages-components/Login/Login";
 import Movies from "../pages-components/Movies/Movies";
@@ -28,10 +27,14 @@ import LocalStorage from "../../utils/LocalStorage";
 
 export const App = () => {
   const [token, setToken] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isPreloader, setIsPreloader] = useState(true);
+  const [likedFilms, setLikedFilms] = useState(null);
+
   const [isFetchError, setIsFetchError] = useState(false);
+  const [controlToken, setControlToken] = useState(false);
   const [messageAttention, setMessageAttention] = useState(null);
   const [isActiveAttention, setIsActiveAttention] = useState(false);
 
@@ -48,9 +51,13 @@ export const App = () => {
     field: "",
     short: false,
   });
-
+  const controlReady = !!token && !!jwtLocal;
   useEffect(() => {
     setIsFetchError(false);
+    if (controlReady) {
+      ctrlToken();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   useEffect(() => {
@@ -59,10 +66,10 @@ export const App = () => {
   }, []);
 
   const handleLoginToken = () => {
-    const token = jwtLocal.load();
-    if (token) {
-      setToken(token);
-      getUserInfo(token);
+    const jwt = jwtLocal.load();
+    if (jwt) {
+      setToken(jwt);
+      getUserInfo(jwt);
     } else {
       setIsPreloader(false);
     }
@@ -70,6 +77,7 @@ export const App = () => {
 
   const handleRegister = (name, email, password) => {
     setIsFetchError(false);
+    setIsLoading(true);
     mainApi
       .signup({ name, email, password })
       .then(() => {
@@ -79,12 +87,15 @@ export const App = () => {
         setIsFetchError(true);
         showAttention(reports.apiMessages.error);
       })
-      .finally(() => {});
+      .finally(() => {
+        setIsLoading(false);
+        setIsPreloader(false);
+      });
   };
 
   const handleLogin = (email, password) => {
     setIsFetchError(false);
-
+    setIsLoading(true);
     mainApi
       .signin({ email, password })
       .then((res) => {
@@ -95,46 +106,56 @@ export const App = () => {
         getUserInfo(token);
         history.push("/movies");
       })
+
       .catch(() => {
         setIsFetchError(true);
       })
-      .finally(() => {});
+      .finally(() => {
+        setIsLoading(false);
+        setIsPreloader(false);
+      });
   };
 
   function requestAllFilms() {
-    return moviesApi.getMovies();
+    return moviesApi.getMovies().finally(() => {
+      setIsLoading(false);
+      setIsPreloader(false);
+    });
   }
 
   function getUserInfo(token) {
+    setIsLoading(true);
     mainApi
       .getUserInfo(token)
+
       .then((user) => {
         if (!isLoggedIn) setIsLoggedIn(true);
         setCurrentUser(user);
       })
       .catch(() => {
-        // showAttention(reports.attentionMessages.error.get_user);
-        // throw new Error();
         setIsPreloader(false);
       })
       .finally(() => {
+        setIsLoading(false);
         setIsPreloader(false);
       });
   }
 
   function handleUpdateUser(name, email) {
+    setIsLoading(true);
     return mainApi
       .updateUserInfo({ name, email }, token)
       .then((res) => {
         setCurrentUser(res.data);
         showAttention(reports.attentionMessages.done.upd_profile);
-        setTimeout(() => {
-          history.push("/");
-        }, 2000);
       })
       .catch(() => {
         showAttention(reports.attentionMessages.error.upd_profile);
         throw new Error();
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setIsPreloader(false);
       });
   }
 
@@ -157,7 +178,6 @@ export const App = () => {
 
   // Изменение флажка у фильма
   function handleClickLikeButton(filmId, film) {
-   
     return filmId
       ? mainApi.deleteLikeFilm(filmId, token).catch(() => {
           showAttention(Attention - reports.error.delete_movie);
@@ -171,7 +191,29 @@ export const App = () => {
 
   // Запросить отмеченные фильмы
   function requestLikeFilms() {
+    return mainApi
+      .fetchLikeFilms(token)
+      .then((films) => {
+        setLikedFilms(formatLikedFilms(films));
+      })
+      .catch(() => {
+        showAttention(reports.apiMessages.error);
+      })
+      .finally(() => {});
+  }
+
+  function requestLikeSavedFilms() {
     return mainApi.fetchLikeFilms(token);
+  }
+
+  function ctrlToken() {
+    if (token === jwtLocal.load()) {
+      setControlToken(true);
+    } else {
+      onSignOut();
+      showAttention(reports.attentionMessages.error.autorization);
+      setControlToken(false);
+    }
   }
 
   function showAttention(message) {
@@ -181,6 +223,14 @@ export const App = () => {
       setIsActiveAttention(false);
     }, 2000);
   }
+
+  function formatLikedFilms(films) {
+    return films.map((film) => ({
+      movieId: film.movieId,
+      _id: film._id,
+    }));
+  }
+
   return (
     <div className='App page'>
       <CurrentUserContext.Provider
@@ -189,60 +239,68 @@ export const App = () => {
         <Switch>
           <Route exact path='/' component={Main} />
 
+          <Route path='/signup'>
+            {!isLoggedIn ? "" : <Redirect to='/' />}
+
+            <Register
+              handleRegister={handleRegister}
+              isPreloader={isPreloader}
+              isLoading={isLoading}
+            />
+          </Route>
+
+          <Route path='/signin'>
+            {!isLoggedIn ? "" : <Redirect to='/' />}
+            <Login
+              isLoading={isLoading}
+              isPreloader={isPreloader}
+              handleLogin={handleLogin}
+            />
+          </Route>
+
+          <ProtectedRoute
+            path='/profile'
+            component={Profile}
+            isLoading={isLoading}
+            loggedIn={isLoggedIn}
+            onSignOut={onSignOut}
+            controlToken={controlToken}
+            ctrlToken={ctrlToken}
+            isPreloader={isPreloader}
+            currentUser={currentUser}
+            handleUpdateUser={handleUpdateUser}
+          />
+
           <ProtectedRoute
             path='/movies'
-            loggedIn={isLoggedIn}
             component={Movies}
-            requestAllFilms={requestAllFilms}
-            handleClickLikeButton={handleClickLikeButton}
-            requestLikeFilms={requestLikeFilms}
-            isPreloader={isPreloader}
+            loggedIn={isLoggedIn}
+            isLoading={isLoading}
             filmsLocal={filmsLocal}
+            likedFilms={likedFilms}
+            isPreloader={isPreloader}
+            requestAllFilms={requestAllFilms}
+            requestLikeFilms={requestLikeFilms}
             filtredFilmsLocal={filtredFilmsLocal}
+            handleClickLikeButton={handleClickLikeButton}
             searchQueryMoviesLocal={searchQueryMoviesLocal}
           />
 
           <ProtectedRoute
             path='/saved-movies'
             component={SavedMovies}
-            isLoggedIn={isLoggedIn}
-            handleClickLikeButton={handleClickLikeButton}
-            requestLikeFilms={requestLikeFilms}
-            isPreloader={isPreloader}
+            token={token}
+            isLoading={isLoading}
             filmsLocal={filmsLocal}
+            likedFilms={likedFilms}
+            isLoggedIn={isLoggedIn}
+            controlToken={controlToken}
+            isPreloader={isPreloader}
+            requestLikeSavedFilms={requestLikeSavedFilms}
             filtredFilmsLocal={filtredFilmsLocal}
+            handleClickLikeButton={handleClickLikeButton}
             searchQuerySavedMoviesLocal={searchQuerySavedMoviesLocal}
           ></ProtectedRoute>
-
-          <ProtectedRoute
-            path='/profile'
-            loggedIn={isLoggedIn}
-            component={Profile}
-            currentUser={currentUser}
-            handleUpdateUser={handleUpdateUser}
-            onSignOut={onSignOut}
-            isPreloader={isPreloader}
-          />
-
-          <Route path='/signin'>
-            {!isLoggedIn ? "" : <Redirect to='/' />}
-            <Login handleLogin={handleLogin} isPreloader={isPreloader} />
-          </Route>
-
-          <Route path='/signup'>
-            {!isLoggedIn ? "" : <Redirect to='/' />}
-            <Register
-              handleRegister={handleRegister}
-              isPreloader={isPreloader}
-            />
-          </Route>
-
-          <Route path='/form'>
-            <Form 
-                handleRegister={handleRegister}
-                isPreloader={isPreloader}
-            />
-          </Route>
 
           <Route path='*'>
             <NotFound />

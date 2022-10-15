@@ -34,12 +34,12 @@ export const Register = (props) => {
     setPasswordType("password");
   };
   return (
-    <main className='form register sfp_type_reg hp'>
+    <form className='form register sfp_type_reg hp' onSubmit={onSubmit}>
       <div className='form__header form__header_type_auth'>
         <Logo />
       </div>
       <div className='form__container form__container_type_auth'>
-        <form className='form__admin form__admin_type_auth' onSubmit={onSubmit}>
+        <main className='form__admin form__admin_type_auth'>
           <div className='form__container form__container_type_auth'>
             <h3 className='form__heading form__heading_type_auth'>
               Добро пожаловать!
@@ -50,17 +50,17 @@ export const Register = (props) => {
                 <span className='form__text form__text_type_auth'> </span>
                 <input
                   className='form__item form__item_type_auth form__item_el_name form__item_el_name_type_auth'
-                  onChange={name.handleChange}
-                  value={name.value.field || ""}
-                 onClick={name.onClick}
-                  onBlur={name.onBlur}
-                  // onFocus={name.onClick}
                   name='name'
                   type='text'
-                  autoComplete='off'
                   autoFocus={true}
                   placeholder='Имя'
-                  required
+                  autoComplete='off'
+                  onBlur={name.onBlur}
+                  onClick={name.onClick}
+                  disabled={props.isLoading}
+                  onChange={name.handleChange}
+                  value={name.value.field || ""}
+                  // required
                   // ref={name.callbackRef}
                 />
                 <hr className='form__line line line_form line_form_type_auth'></hr>
@@ -76,15 +76,16 @@ export const Register = (props) => {
                 <span className='form__text form__text_type_auth'> </span>
                 <input
                   className='form__item form__item_type_auth form__item_el_email form__item_el_email_type_auth'
-                  onChange={email.handleChange}
-                  value={email.value.field || ""}
-                  onClick={email.onClick}
-                  onBlur={email.onBlur}
-                  onTouchStart={password.onClick}
                   name='email'
                   type='email'
                   autoComplete='off'
                   placeholder='Email'
+                  onBlur={email.onBlur}
+                  // onClick={email.onClick}
+                  disabled={props.isLoading}
+                  onTouchStart={password.onClick}
+                  onChange={email.handleChange}
+                  value={email.value.field || ""}
                 />
                 <hr className='form__line line line_form line_form_type_auth'></hr>
                 <span className='form__error' id='error-userEmail'>
@@ -98,15 +99,16 @@ export const Register = (props) => {
                 <span className='form__text form__text_type_auth'> </span>
                 <input
                   className='form__item form__item_type_auth form__item_type_auth_error form__item_el_name form__item_el_name_type_auth'
-                  onChange={password.handleChange}
-                  value={password.value.field || ""}
-                  onClick={password.onClick}
-                  onTouchStart={password.onClick}
-                  onBlur={password.onBlur}
                   name='password'
                   type={passwordType}
                   autoComplete='off'
                   placeholder='Password'
+                  onBlur={password.onBlur}
+                  // onClick={password.onClick}
+                  onTouchStart={password.onClick}
+                  disabled={props.isLoading}
+                  onChange={password.handleChange}
+                  value={password.value.field || ""}
                 />
                 <button
                   type='button'
@@ -129,7 +131,7 @@ export const Register = (props) => {
                 <button
                   type='submit'
                   className='form__button form__button_el_button form__text'
-                  disabled={
+                  disabled={props.isLoading||
                     !name.inputValid ||
                     !email.inputValid ||
                     !password.inputValid
@@ -151,8 +153,8 @@ export const Register = (props) => {
               Войти{" "}
             </Link>
           </div>
-        </form>
+        </main>
       </div>
-    </main>
+    </form>
   );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { mainApi } from "../../../utils/MainApi";
 
 import "./SavedMovies.css";
 import { Header } from "../../nested-components/Header/Header";
@@ -11,11 +12,13 @@ import { filterFilms } from "../../../utils/filterFilms";
 import { reports, short_movie } from "../../../utils/constants";
 
 export const SavedMovies = ({
-  requestLikeFilms,
+  requestLikeSavedFilms,
   handleClickLikeButton,
   filmsLocal,
+  controlToken,
   searchQuerySavedMoviesLocal,
   path,
+  token,
 }) => {
   const [likedFilms, setLikedFilms] = useState(null);
   const [displayedFilms, setDisplayedFilms] = useState(null);
@@ -23,15 +26,21 @@ export const SavedMovies = ({
   const [errorMessage, setErrorMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
-    getLikeFilms();
+    getLikeSavedFilms();
+    
     // eslint-disable-next-line
-  }, []); // ничего не добавлятьб будет ошибка CORS
+  }, []);
 
-  function getLikeFilms() {
-    startLoader();
-    requestLikeFilms()
-      .then((films) => {
-        setAllFilms(films);
+  function getLikeSavedFilms() {
+    // startLoader();
+    // return mainApi.fetchLikeFilms(token)
+
+    // console.log('ffffffffff',controlToken)
+    // if(controlToken){
+    requestLikeSavedFilms()
+
+       .then((films) => {
+       setAllFilms(films);
         hideErrorMessage();
       })
       .catch(() => {
@@ -39,8 +48,8 @@ export const SavedMovies = ({
       })
       .finally(() => {
         stopLoader();
-      });
-  }
+   });}
+ 
 
   function searchFilms(values) {
     const films = filterFilms(likedFilms, short_movie, values);

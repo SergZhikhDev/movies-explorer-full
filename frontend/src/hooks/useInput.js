@@ -49,11 +49,6 @@ export const useInputt = (initialValue, validations) => {
     setValue({ ...value, [name]: val });
   };
 
-  // const onClick = (input) => {
-  //   // input.nativeEvent.target.autofocus=true
-  //   // setisDirty(false);
-  // };
-
   const onBlur = (e) => {
     setisDirty(true);
   };

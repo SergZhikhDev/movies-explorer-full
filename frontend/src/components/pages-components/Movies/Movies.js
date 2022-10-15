@@ -9,31 +9,31 @@ import { MoviesCardList } from "../../nested-components/MoviesCardList/MoviesCar
 import { filterFilms } from "../../../utils/filterFilms";
 import { formatLikedFilms, setLike } from "../../../utils/likes";
 import {
-  reports,
   count,
-  breackpoint,
+  reports,
   short_movie,
+  breackpoint,
 } from "../../../utils/constants";
 import { useCardCount } from "../../../utils/useCardCount";
 
 function Movies({
+  path,
+  isLoading,
+  filmsLocal,
+  likedFilms,
   requestAllFilms,
   requestLikeFilms,
-  handleClickLikeButton,
-  filmsLocal,
   filtredFilmsLocal,
+  handleClickLikeButton,
   searchQueryMoviesLocal,
-  path,
 }) {
-  // Фильмы
   const [allFilms, setAllFilms] = useState(null);
-  const [likedFilms, setLikedFilms] = useState(null);
+  // const [likedFilms, setLikedFilms] = useState(null);
+  const [queryValues, setQueryValues] = useState(null);
   const [filtredFilms, setFiltredFilms] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [displayedFilms, setDisplayedFilms] = useState(null);
 
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [queryValues, setQueryValues] = useState(null);
   const { countAddFilms, startCountFilms, setParamsCountFilms } = useCardCount(
     count,
     breackpoint
@@ -57,6 +57,10 @@ function Movies({
 
   // Отфильтровать фильмы
   useEffect(() => {
+    if (!queryValues) {
+      setQueryValues(searchQueryMoviesLocal.load());
+    }
+
     if (allFilms?.length && queryValues) {
       const films = filterFilms(allFilms, short_movie, queryValues);
 
@@ -68,36 +72,22 @@ function Movies({
         : showErrorMessage(reports.apiMessages.not_found);
     }
     // eslint-disable-next-line
-  }, [allFilms, queryValues]);
+  }, [allFilms]);
 
-  // Отобразить фильмы
-  useEffect((values) => {
-    searchFilms(values)
+  // Отобразить фильм
+  useEffect(() => {
     if (filtredFilms?.length) {
       const films = setLike(filtredFilms, likedFilms);
       setDisplayedFilms([...films.slice(0, startCountFilms)]);
     }
     // eslint-disable-next-line
-  }, [filtredFilms, startCountFilms,path]);
+  }, [filtredFilms, startCountFilms, allFilms]);
 
   function getLikeFilms() {
-    startLoader();
-    requestLikeFilms()
-      .then((films) => {
-        setLikedFilms(formatLikedFilms(films));
-        // setAllFilms(films);
-        hideErrorMessage();
-      })
-      .catch(() => {
-        showErrorMessage(reports.apiMessages.error);
-      })
-      .finally(() => {
-        stopLoader();
-      });
+    requestLikeFilms();
   }
 
   function getAllFilms() {
-    startLoader();
     requestAllFilms()
       .then((allFilms) => {
         setAllFilms(allFilms);
@@ -107,9 +97,7 @@ function Movies({
       .catch(() => {
         showErrorMessage(reports.apiMessages.error);
       })
-      .finally(() => {
-        stopLoader();
-      });
+      .finally(() => {});
   }
 
   function getAllLocalFilm() {
@@ -124,14 +112,6 @@ function Movies({
     }
 
     setQueryValues(values);
-  }
-
-  function startLoader() {
-    setIsLoading(true);
-  }
-
-  function stopLoader() {
-    setIsLoading(false);
   }
 
   function showMoreFilms() {
@@ -152,15 +132,8 @@ function Movies({
   }
 
   function loadFilmsLocal() {
-    // const localFilms = filmsLocal.load();
     setAllFilms(filmsLocal.load());
   }
-
-
-  // function saveFiltredFilmsLocal() {
-  //   // const filtrFilmsLocal = filtredFilmsLocal.load();
-  //   setAllFilms(filtredFilmsLocal.load());
-  // }
 
   function addResizeEvent() {
     window.addEventListener("resize", setParamsCountFilms);
@@ -187,9 +160,10 @@ function Movies({
       <Header />
       <main className='movies sp hp'>
         <SearchForm
+          path={path}
+          isLoading={isLoading}
           searchFilms={searchFilms}
           searchQueryLocal={searchQueryMoviesLocal}
-          path={path}
         />
         <MoviesCardList
           films={displayedFilms}
