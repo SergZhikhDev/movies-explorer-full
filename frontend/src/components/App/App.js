@@ -266,9 +266,9 @@ export const App = () => {
           <Route path='/form'>
             {!isLoggedIn ? "" : <Redirect to='/' />}
             <Form
-              isLoading={isLoading}
-              isPreloader={isPreloader}
-              handleLogin={handleLogin}
+               handleRegister={handleRegister}
+               isPreloader={isPreloader}
+               isLoading={isLoading}
             />
           </Route>
 
