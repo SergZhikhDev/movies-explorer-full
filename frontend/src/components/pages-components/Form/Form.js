@@ -1,14 +1,16 @@
 import { useState,useContext} from "react";
+
 import "./Form.css";
-import { useInputt } from "../../../hooks/useInput";
-import { config } from "../../../utils/constants";
-import { ErrorText } from "../../nested-components/ErrorText/ErrorText";
-import { Link } from "react-router-dom";
+
 import Logo from "../../nested-components/Logo/Logo";
+import { Link } from "react-router-dom";
+import { ErrorText } from "../../nested-components/ErrorText/ErrorText";
+import { config } from "../../../utils/constants";
+
+import { useInputt } from "../../../hooks/useInput";
 import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
 
 export const Form = (props) => {
-
   const { isFetchError } = useContext(CurrentUserContext);
 
   const field = useInputt({}, config.name);
@@ -43,14 +45,14 @@ export const Form = (props) => {
           <h3 className='form__heading form__heading_type_auth'>
             Добро пожаловать!
           </h3>
-          <input
+          {/* <input
             type='text'
             name='field'
             className='fieldForm'
             placeholder='поле'
             value={field.value.field || ""}
             onChange={field.handleChange}
-          />
+          /> */}
           <fieldset className='form__input-container form__input-container_type_auth'>
             <label className='form__label form__label_type_auth'>
               Имя
@@ -151,8 +153,8 @@ export const Form = (props) => {
         </div>
       </div>
 
-      <button type='submit' className='buttonForm'></button>
-      <hr className='form__line line line_form line_form_type_auth'></hr>
+      {/* <button type='submit' className='buttonForm'></button> */}
+      {/* <hr className='form__line line line_form line_form_type_auth'></hr> */}
       <span className='form__error' id='error-userName'>
         {field.isDirty && (
           <ErrorText type='auth'>{field.errorMessages}</ErrorText>
