@@ -36,7 +36,7 @@ export const Form = (props) => {
   };
 
   return (
-    <form  onSubmit={onSubmit}>
+    <form  className='form register sfp_type_reg hp'  onSubmit={onSubmit}>
       <div className='form__header form__header_type_auth'>
         <Logo />
       </div>
