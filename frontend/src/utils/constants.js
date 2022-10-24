@@ -2,13 +2,13 @@ const regex = {
   name: /^[A-Za-zА-Яа-яЁё /s -]+$/,
   email:
     /^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|ru)$/i,
-  password: /^.$/,
-  // /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]/,
+
+    password:   /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]/,
 };
 const config = {
   name: { isEmpty: true, minLength: 2, maxLength: 30, isName: true },
   email: { isEmpty: true, isEmail: true },
-  password: { isEmpty: true, minLength: 3, maxLength: 10 /*, isPass: true*/ },
+  password: { isEmpty: true, minLength: 3, maxLength: 10 , isPass: true },
   etc: { isEmpty: true },
   nameProfile: { minLength: 2, maxLength: 30, isName: true },
   emailProfile: { isEmail: true },

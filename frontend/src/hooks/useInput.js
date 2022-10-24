@@ -7,8 +7,6 @@ export const useInputt = (initialValue, validations) => {
   const currentUser = useContext(CurrentUserContext);
 
   const [isDirty, setisDirty] = useState(false);
-  // const [readyForUpdate, setReadyForUpdate] = useState(false);
-  // const [needTwoChanges, setNeedTwoChanges] = useState("");
 
   const valid = useValidation(value, validations);
   const { errorsKit, inputValid } = valid;
@@ -72,14 +70,6 @@ export const useInputt = (initialValue, validations) => {
     value.field,
   ]);
 
-  // useEffect(() => {
-  //   (value !== currentUser.currentUser.name &&
-  //     value === currentUser.currentUser.email) ||
-  //   (value === currentUser.currentUser.name &&
-  //     value !== currentUser.currentUser.email)
-  //     ? setNeedTwoChanges("Измените оба поля")
-  //     : setNeedTwoChanges("");
-  // }, [currentUser.currentUser.email, currentUser.currentUser.name, value]);
 
   const callbackRef = useCallback((inputElement) => {
     if (inputElement) {

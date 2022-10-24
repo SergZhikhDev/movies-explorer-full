@@ -45,176 +45,197 @@ export const useValidation = (value, validations) => {
           break;
 
         case "minLength":
-          !emptyErr && value.field.length < validations[validation]
-            ? setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, minLengthError: true },
-                messages: {
-                  ...kitMess,
-                  message: errMess.minLengthError,
-                },
-              }))
-            : !emptyErr && !minLhErr && !namErr
-            ? setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, minLengthError: false },
-                messages: {
-                  ...kitMess,
-                  message: null,
-                },
-              }))
-            : setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, minLengthError: false },
-                messages: {
-                  ...kitMess,
-                  message: errMess.emptyError,
-                },
-              }));
+          if (!emptyErr && value.field.length < validations[validation]) {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, minLengthError: true },
+              messages: {
+                ...kitMess,
+                message: errMess.minLengthError,
+              },
+            }));
+          } else if (!emptyErr && !minLhErr && !namErr) {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, minLengthError: false },
+              messages: {
+                ...kitMess,
+                message: null,
+              },
+            }));
+          } else {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, minLengthError: false },
+              messages: {
+                ...kitMess,
+                message: errMess.emptyError,
+              },
+            }));
+          }
 
           break;
 
         case "maxLength":
-          !emptyErr && value.field.length > validations[validation]
-            ? setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, maxLengthError: true },
-                messages: {
-                  ...errorsKit.messages,
-                  message: reports.errorMessages.maxLengthError,
-                },
-              }))
-            : !emptyErr && minLhErr && !maxLhErr
-            ? setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, maxLengthError: false },
-                messages: {
-                  ...kitMess,
-                  message: errMess.minLengthError,
-                },
-              }))
-            : !emptyErr && !minLhErr && !maxLhErr
-            ? setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, maxLengthError: false },
-                messages: {
-                  ...kitMess,
-                  message: null,
-                },
-              }))
-            : setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, maxLengthError: false },
-                messages: {
-                  ...errorsKit.messages,
-                  message: errMess.emptyError,
-                },
-              }));
+          if (!emptyErr && value.field.length > validations[validation]) {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, maxLengthError: true },
+              messages: {
+                ...errorsKit.messages,
+                message: reports.errorMessages.maxLengthError,
+              },
+            }));
+          } else if (!emptyErr && minLhErr && !maxLhErr) {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, maxLengthError: false },
+              messages: {
+                ...kitMess,
+                message: errMess.minLengthError,
+              },
+            }));
+          } else if (!emptyErr && !minLhErr && !maxLhErr) {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, maxLengthError: false },
+              messages: {
+                ...kitMess,
+                message: null,
+              },
+            }));
+          } else {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, maxLengthError: false },
+              messages: {
+                ...errorsKit.messages,
+                message: errMess.emptyError,
+              },
+            }));
+          }
 
           break;
 
         case "isEmail":
-          !emptyErr && !regex.email.test(String(value.field).toLowerCase())
-            ? setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, emailError: true },
-                messages: {
-                  ...kitMess,
-                  message: errMess.emailError,
-                },
-              }))
-            : emptyErr
-            ? setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, emailError: false },
-                messages: {
-                  ...kitMess,
-                  message: errMess.emptyError,
-                },
-              }))
-            : setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, emailError: false },
-                messages: {
-                  ...kitMess,
-                  message: null,
-                },
-              }));
-
+          if (
+            !emptyErr &&
+            !regex.email.test(String(value.field).toLowerCase())
+          ) {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, emailError: true },
+              messages: {
+                ...kitMess,
+                message: errMess.emailError,
+              },
+            }));
+          } else if (emptyErr) {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, emailError: false },
+              messages: {
+                ...kitMess,
+                message: errMess.emptyError,
+              },
+            }));
+          } else {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, emailError: false },
+              messages: {
+                ...kitMess,
+                message: null,
+              },
+            }));
+          }
           break;
-        case "isName":
-          !regex.name.test(String(value.field).toLowerCase()) && !emptyErr
-            ? setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, nameError: true },
-                messages: {
-                  ...errorsKit.messages,
-                  message: errMess.nameError,
-                },
-              }))
-            : regex.name.test(String(value.field).toLowerCase()) && minLhErr
-            ? setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, nameError: false },
-                messages: {
-                  ...errorsKit.messages,
-                  message: errMess.minLengthError,
-                },
-              }))
-            : regex.name.test(String(value.field).toLowerCase()) && maxLhErr
-            ? setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, nameError: false },
-                messages: {
-                  ...errorsKit.messages,
-                  message: errMess.maxLengthError,
-                },
-              }))
-            : emptyErr
-            ? setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, nameError: false },
-                messages: {
-                  ...errorsKit.messages,
-                  message: errMess.emptyError,
-                },
-              }))
-            : setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, nameError: false },
-                messages: {
-                  ...errorsKit.messages,
-                  message: null,
-                },
-              }));
 
+        case "isName":
+          if (
+            !regex.name.test(String(value.field).toLowerCase()) &&
+            !emptyErr
+          ) {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, nameError: true },
+              messages: {
+                ...errorsKit.messages,
+                message: errMess.nameError,
+              },
+            }));
+          } else if (
+            regex.name.test(String(value.field).toLowerCase()) &&
+            minLhErr
+          ) {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, nameError: false },
+              messages: {
+                ...errorsKit.messages,
+                message: errMess.minLengthError,
+              },
+            }));
+          } else if (
+            regex.name.test(String(value.field).toLowerCase()) &&
+            maxLhErr
+          ) {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, nameError: false },
+              messages: {
+                ...errorsKit.messages,
+                message: errMess.maxLengthError,
+              },
+            }));
+          } else if (emptyErr) {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, nameError: false },
+              messages: {
+                ...errorsKit.messages,
+                message: errMess.emptyError,
+              },
+            }));
+          } else {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, nameError: false },
+              messages: {
+                ...errorsKit.messages,
+                message: null,
+              },
+            }));
+          }
           break;
 
         case "isPass":
-          !regex.password.test(String(value.field)) && !emptyErr
-            ? setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, passwordError: true },
-                messages: {
-                  ...errorsKit.messages,
-                  message: errMess.passwordError,
-                },
-              }))
-            : regex.password.test(String(value.field)) && minLhErr
-            ? setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, passwordError: false },
-                messages: {
-                  ...errorsKit.messages,
-                  message: errMess.minLengthError,
-                },
-              }))
-            : regex.password.test(String(value.field)) && maxLhErr
-            ? setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, passwordError: false },
-                messages: {
-                  ...errorsKit.messages,
-                  message: errMess.maxLengthError,
-                },
-              }))
-            : regex.password.test(String(value.field)) && emptyErr
-            ? setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, passwordError: false },
-                messages: {
-                  ...errorsKit.messages,
-                  message: errMess.emptyError,
-                },
-              }))
-            : setErrorsKit((errorsKit) => ({
-                errors: { ...errorsKit.errors, passwordError: false },
-                messages: {
-                  ...errorsKit.messages,
-                  message: null,
-                },
-              }));
+          if (!regex.password.test(String(value.field)) && !emptyErr) {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, passwordError: true },
+              messages: {
+                ...errorsKit.messages,
+                message: errMess.passwordError,
+              },
+            }));
+          } else if (regex.password.test(String(value.field)) && minLhErr) {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, passwordError: false },
+              messages: {
+                ...errorsKit.messages,
+                message: errMess.minLengthError,
+              },
+            }));
+          } else if (regex.password.test(String(value.field)) && maxLhErr) {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, passwordError: false },
+              messages: {
+                ...errorsKit.messages,
+                message: errMess.maxLengthError,
+              },
+            }));
+          } else if (emptyErr) {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, passwordError: false },
+              messages: {
+                ...errorsKit.messages,
+                message: errMess.emptyError,
+              },
+            }));
+          } else {
+            setErrorsKit((errorsKit) => ({
+              errors: { ...errorsKit.errors, passwordError: false },
+              messages: {
+                ...errorsKit.messages,
+                message: null,
+              },
+            }));
+          }
 
           break;
         default:

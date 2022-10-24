@@ -13,7 +13,6 @@ root.render(
       <App />
     </React.StrictMode>
   </BrowserRouter>
-  // document.getElementById('root')
 );
 
 reportWebVitals();
