@@ -40,8 +40,6 @@ export const SearchForm = ({
               type='text'
               autoComplete='off'
               placeholder='Фильм'
-              // required
-              // id='search-movie'
               onBlur={film.onBlur}
               disabled={isLoading}
               ref={film.callbackRef}

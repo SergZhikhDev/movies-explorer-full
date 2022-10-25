@@ -1,5 +1,4 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useContext } from "react";
 
 import "./MenuResponce.css";
 import MenuNavBtnsList from "../MenuNavBtnsList/MenuNavBtnsList";
@@ -15,10 +14,8 @@ function MenuResponce() {
       <label className='res-menu__btn' htmlFor='res-menu__toggle'>
         <span></span>
       </label>
-      {/* <div className="res-menu__nav-container"> */}
       {isLoggedIn && <MenuNavBtnsList />}
       {!isLoggedIn && <MenuAuthBtnsList />}
-      {/* </div> */}
     </div>
   );
 }

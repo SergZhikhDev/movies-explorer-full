@@ -15,13 +15,17 @@ export const MoviesCard = ({ film, handleClickLikeButton }) => {
   const regexLink =
     /^http(s|)(:|)\/\/(www.|)((\w+|\d+)(-|\.))+[a-z]{2,3}(\S+|)(#| +|)$/i;
 
-  !regexLink.test(String(film.trailerLink).toLowerCase())
-    ? (trailerLink = "https://www.youtube.com/watch?v=5oX5R_IFvTs&t=9s")
-    : (trailerLink = film.trailerLink);
+  if (!regexLink.test(String(film.trailerLink).toLowerCase())) {
+    trailerLink = "https://www.youtube.com/watch?v=5oX5R_IFvTs&t=9s";
+  } else {
+    trailerLink = film.trailerLink;
+  }
 
-  !film.image.url
-    ? (imageUrl = `${film.image}`)
-    : (imageUrl = `${base_url}/${film.image.url}`);
+  if (!film.image.url) {
+    imageUrl = `${film.image}`;
+  } else {
+    imageUrl = `${base_url}/${film.image.url}`;
+  }
 
   useEffect(() => {
     const filmId = film._id;
@@ -34,13 +38,13 @@ export const MoviesCard = ({ film, handleClickLikeButton }) => {
     } else {
       const filmData = {
         country: film.country || "-",
-        director: film.director|| "-",
+        director: film.director || "-",
         duration: film.duration,
-        year: film.year|| "-",
-        description: film.description|| "-",
+        year: film.year || "-",
+        description: film.description || "-",
         image: base_url + film.image.url,
-        trailerLink:  trailerLink,
-        nameRU: film.nameRU|| "-",
+        trailerLink: trailerLink,
+        nameRU: film.nameRU || "-",
         nameEN: film.nameEN || "-",
         thumbnail: base_url + film.image.formats.thumbnail.url,
         movieId: film.id,

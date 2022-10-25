@@ -9,7 +9,6 @@ import {
 
 import "./App.css";
 import { Main } from "../pages-components/Main/Main";
-import { Form } from "../pages-components/Form/Form";
 import Login from "../pages-components/Login/Login";
 import Movies from "../pages-components/Movies/Movies";
 import NotFound from "../pages-components/NotFound/NotFound";
@@ -261,14 +260,6 @@ export const App = () => {
               isLoading={isLoading}
               isPreloader={isPreloader}
               handleLogin={handleLogin}
-            />
-          </Route>
-          <Route path='/form'>
-            {!isLoggedIn ? "" : <Redirect to='/' />}
-            <Form
-               handleRegister={handleRegister}
-               isPreloader={isPreloader}
-               isLoading={isLoading}
             />
           </Route>
 

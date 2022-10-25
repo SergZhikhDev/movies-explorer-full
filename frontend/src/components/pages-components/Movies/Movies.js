@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./Movies.css";
 import { Header } from "../../nested-components/Header/Header";
@@ -28,7 +27,6 @@ function Movies({
   searchQueryMoviesLocal,
 }) {
   const [allFilms, setAllFilms] = useState(null);
-  // const [likedFilms, setLikedFilms] = useState(null);
   const [queryValues, setQueryValues] = useState(null);
   const [filtredFilms, setFiltredFilms] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);

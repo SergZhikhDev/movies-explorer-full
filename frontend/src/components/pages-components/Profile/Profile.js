@@ -80,7 +80,6 @@ export const Profile = ({
                     className='form__item form__item_el_name'
                     value={name.userName || ""}
                     onChange={name.handleProfileChange}
-                    // onBlur={name.onBlur}
                     name='name'
                     type='text'
                     autoComplete='off'
@@ -106,7 +105,6 @@ export const Profile = ({
                     className='form__item form__item_el_email'
                     value={email.userEmail || ""}
                     onChange={email.handleProfileChange}
-                    // onBlur={email.onBlur}
                     name='email'
                     type='email'
                     autoComplete='off'
@@ -133,10 +131,6 @@ export const Profile = ({
                     {email.errorMessages}
                   </ErrorText>
                 )}
-
-              {/* {email.needTwoChanges && (
-                <ErrorText type='auth'>3{email.needTwoChanges}</ErrorText>
-              )} */}
             </span>
             <label className='form__label form__label_el_handlers'>
               <input type='submit' className='form__item invisible' />
