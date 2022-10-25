@@ -35,7 +35,7 @@ export const Register = (props) => {
     setPasswordType("password");
   };
   return (
-    <form className='form register sfp_type_reg hp' onSubmit={onSubmit}>
+    <form className='form register sfp_type_reg' onSubmit={onSubmit}>
       <div className='form__header form__header_type_auth'>
         <Logo />
       </div>
@@ -132,7 +132,8 @@ export const Register = (props) => {
                 <button
                   type='submit'
                   className='form__button form__button_el_button form__text'
-                  disabled={props.isLoading||
+                  disabled={
+                    props.isLoading ||
                     !name.inputValid ||
                     !email.inputValid ||
                     !password.inputValid

@@ -2,7 +2,7 @@ import "./Footer.css";
 
 function Footer() {
   return (
-    <footer className='footer sp hp'>
+    <footer className='footer sp '>
       <h5 className='footer__title'>
         Учебный проект Яндекс.Практикум х BeatFilm.
       </h5>

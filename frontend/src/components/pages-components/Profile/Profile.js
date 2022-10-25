@@ -52,7 +52,7 @@ export const Profile = ({
 
   return (
     <main
-      className=' form form_type_profile sfp hp'
+      className=' form form_type_profile sfp'
       noValidate
       onSubmit={onSubmit}
     >

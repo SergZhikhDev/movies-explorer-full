@@ -19,7 +19,7 @@ function Login(props) {
   };
 
   return (
-    <main className='form login sfp_type_reg hp'>
+    <main className='form login sfp_type_reg'>
       <div className='form__header form__header_type_auth '>
         <Logo />
       </div>

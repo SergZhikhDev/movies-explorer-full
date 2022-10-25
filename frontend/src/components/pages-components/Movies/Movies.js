@@ -7,7 +7,7 @@ import Footer from "../../nested-components/Footer/Footer";
 import { SearchForm } from "../../nested-components/SearchForm/SearchForm";
 import { MoviesCardList } from "../../nested-components/MoviesCardList/MoviesCardList";
 import { filterFilms } from "../../../utils/filterFilms";
-import {  setLike } from "../../../utils/likes";
+import { setLike } from "../../../utils/likes";
 import {
   count,
   reports,
@@ -158,7 +158,7 @@ function Movies({
   return (
     <>
       <Header />
-      <main className='movies sp hp'>
+      <main className='movies sp'>
         <SearchForm
           path={path}
           isLoading={isLoading}

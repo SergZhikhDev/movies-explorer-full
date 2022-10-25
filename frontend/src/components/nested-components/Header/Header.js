@@ -7,7 +7,7 @@ import MenuResponce from "../MenuResponce/MenuResponce";
 
 export const Header = () => {
   return (
-    <header className=' header sp hp'>
+    <header className=' header sp'>
       <Logo />
       <Menu />
       <MenuResponce />

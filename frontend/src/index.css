@@ -22,9 +22,9 @@ button:hover,
   transition: opacity 0.3s linear;
 }
 
-*[disabled]:hover{
+*[disabled]:hover {
   cursor: not-allowed;
-  opacity:1;
+  opacity: 1;
 }
 
 body {
@@ -40,10 +40,10 @@ button {
   cursor: pointer;
   transition: opacity 0.3s;
 }
-*:focus-visible{
-  outline:none ;
+*:focus-visible {
+  outline: none;
   outline-offset: 5px;
- }
+}
 
 img {
   display: block;
@@ -55,12 +55,9 @@ li:last-child {
   margin-right: 0;
 }
 
-
 ul {
   list-style: none;
 }
-
-
 
 /* padding для section (section-padding) */
 .sp,
@@ -69,21 +66,22 @@ ul {
 }
 
 .sfp,
-.section-form-padding
-{padding: 0;}
-
-.sfp_type_reg{
-padding: 0;
+.section-form-padding {
+  padding: 0;
 }
 
+.sfp_type_reg {
+  padding: 0;
+}
 
 @media screen and (max-width: 769px) {
-  .sfp
-  {padding: 0 23.3vw;}
+  .sfp {
+    padding: 0 23.3vw;
+  }
 
-  .sfp_type_reg{
+  .sfp_type_reg {
     padding: 0 24.2vw;
-    }
+  }
 
   .sp {
     padding-left: 50px;
@@ -91,17 +89,17 @@ padding: 0;
   }
 }
 
-
 @media screen and (max-width: 601px) {
   .sp {
     padding-left: 35px;
     padding-right: 35px;
   }
-  .sfp_type_reg{
+  .sfp_type_reg {
     padding: 0 15.75vw;
-    }
-  .sfp
-{padding: 0 18.07vw;}
+  }
+  .sfp {
+    padding: 0 18.07vw;
+  }
 }
 
 @media screen and (max-width: 481px) {
@@ -109,54 +107,23 @@ padding: 0;
     padding-left: 20px;
     padding-right: 20px;
   }
-  .sfp_type_reg{
+  .sfp_type_reg {
     padding: 0 9.85vw;
-    }
-  .sfp
-{padding: 0 14.34vw;}
+  }
+  .sfp {
+    padding: 0 14.34vw;
+  }
 }
 
 @media screen and (max-width: 321px) {
-
   .sp {
     padding-left: 18px;
     padding-right: 18px;
   }
-  .sfp_type_reg{
+  .sfp_type_reg {
     padding: 0 9.37vw;
-    }
-  .sfp
-{padding: 0 9.37vw;}
-}
-
-/* @media screen and (max-width:320px) {
-  .sp {
-    background-image: url(./images/warning.png);
-    background-repeat: round;
-    height: 100vh;
-    width: 100vw
   }
-}
-
-@media screen and (max-height:400px) {
-  .sp {
-    background-image: url(./images/warning.png);
-    background-repeat: round;
-    height: 100vh;
-    width: 100vw
+  .sfp {
+    padding: 0 9.37vw;
   }
-} */
-.hiden-pages,
-.hp {display: flex;}
-
-@media screen and (max-width:320px) {
-  .hp {
-display: none !important;;
-  }
-}
-
-@media screen and (max-height:400px) {
-  .hp {
-    display: none !important;
-      }
 }

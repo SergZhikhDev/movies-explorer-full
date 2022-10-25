@@ -71,7 +71,7 @@ export const SavedMovies = ({
   return (
     <>
       <Header />
-      <main className='saved-movies sp hp'>
+      <main className='saved-movies sp'>
         <SearchForm
           path={path}
           isLoading={isLoading}
